@@ -3,7 +3,7 @@
   <div class="timeline">
     <div class="timeline-item" v-for="event in events">
       <div class="timeline-left">
-        <a class="icon-lg tooltip" data-tooltip="February 2017">
+        <a class="icon-lg">
           <span class="material-icons">{{ event.icon }}</span>
         </a>
       </div>

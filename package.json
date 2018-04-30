@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start"
+    "start": "HOST=0.0.0.0 nuxt start"
   },
   "dependencies": {
     "axios": "^0.18.0",

@@ -20,8 +20,8 @@ if (process.server) {
     getMessage: e => `starred ${e.repo.name}`
   },{
     trigger: typeEq('PushEvent'),
-    icon: 'file upload',
-    getMessage: e => `starred ${e.repo.name}`
+    icon: 'file_upload',
+    getMessage: e => `pushed updates to ${e.repo.name}`
   },{
     trigger: both(typeEq('IssuesEvent'), propEq('action', 'opened')),
     icon: 'info',
