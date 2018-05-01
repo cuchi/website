@@ -12,7 +12,8 @@ If you find anything that could be improved, fell free to contribute! (but keep 
 - [x] Scaffold
 - [x] Add some minimalist CSS lib
 - [x] Add my Github activity
-- [ ] Support other events in my Github activity
+- [x] Let's encrypt!
+- [ ] Support other events from my Github activity
 - [ ] Tests!
 - [ ] Add languages I'm currently working with (get it automatically from wakatime? :thinking:)
 - [ ] Add social media links
