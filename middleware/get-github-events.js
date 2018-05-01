@@ -3,7 +3,7 @@ let cache, getLastEvents
 
 if (process.server) {
   const { promisifyAll } = require('bluebird')
-  const { T, always, both, complement, cond, map,
+  const { T, always, both, complement, cond, last, map,
     prop, propEq, reduceWhile } = require('ramda')
   const NodeCache = require('node-cache')
   const axios = require('axios').default
@@ -43,7 +43,10 @@ if (process.server) {
       complement(propEq('length', many)),
       (events, rawEvent) => {
         const event = getEventInfo(rawEvent)
-        return event ? [...events, event] : events
+        const lastEvent = last(events) || {}
+        return event && event.message !== lastEvent.message
+          ? [...events, event]
+          : events
       },
       [],
       (await axios.get(url)).data)
