@@ -8,7 +8,7 @@
         </a>
       </div>
       <div class="timeline-content">
-        <span class="label">{{ event.date }}</span>:
+        <span class="label">{{ event.date }}</span><br/>
         {{ event.message }}
       </div>
     </div>

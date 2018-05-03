@@ -27,9 +27,14 @@
         </ul>
       </section>
 
-      <section class="col-12">
+      <section class="col-6">
         <h3>My latest activity on GitHub</h3>
         <GithubEvents v-bind:events="events"/>
+      </section>
+
+      <section class="col-6">
+        <h3>What I've been using this week</h3>
+        <WakatimeActivity v-bind:activity="activity"/>
       </section>
     </main>
   </div>
@@ -37,16 +42,17 @@
 
 <script>
   import GithubEvents from '~/components/github-events'
+  import WakatimeActivity from '~/components/wakatime-activity'
 
   export default {
-    middleware: 'get-github-events',
+    middleware: ['github-events', 'wakatime-activity'],
 
     head: {
       title: 'Home'
     },
 
-    components: { GithubEvents },
-    asyncData: ({ events }) => ({ events })
+    components: { GithubEvents, WakatimeActivity },
+    asyncData: ({ events, activity }) => ({ events, activity })
   }
 </script>
 

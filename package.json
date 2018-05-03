@@ -11,13 +11,14 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "date-fns": "^1.29.0",
+    "material-icons": "^0.2.2",
     "node-cache": "^4.2.0",
     "node-sass": "^4.9.0",
     "nuxt": "^1.4.0",
-    "sass-loader": "^7.0.1",
     "ramda": "^0.25.0",
-    "date-fns": "^1.29.0",
-    "material-icons": "^0.2.2",
-    "spectre.css": "^0.5.1"
+    "sass-loader": "^7.0.1",
+    "spectre.css": "^0.5.1",
+    "vue-chartjs": "^3.3.1"
   }
 }

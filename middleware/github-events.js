@@ -1,20 +1,22 @@
 
-let cache, getLastEvents
+const user = process.env.GITHUB_USER || 'cuchi'
+const many = Number(process.env.GITHUB_MANY_EVENTS || 5)
+const interval = Number(process.env.GITHUB_INTERVAL || 600)
+
+let events = []
 
 if (process.server) {
-  const { promisifyAll } = require('bluebird')
   const { T, always, both, complement, cond, last, map,
     prop, propEq, reduceWhile } = require('ramda')
-  const NodeCache = require('node-cache')
-  const axios = require('axios').default
+  const axios = require('axios')
   const { format } = require('date-fns')
 
+  const url = `https://api.github.com/users/${user}/events`
   const typeEq = propEq('type')
-
   const formatEventDate = e =>
     format(new Date(e.created_at), 'MMM Do, YYYY - HH:mm')
 
-  const events = [{
+  const eventTypes = [{
     trigger: typeEq('WatchEvent'),
     icon: 'star',
     getMessage: e => `starred ${e.repo.name}`
@@ -33,39 +35,29 @@ if (process.server) {
       ({ trigger, icon, getMessage }) =>
         [trigger, e =>
           ({ icon, message: getMessage(e), date: formatEventDate(e) })],
-      events),
+      eventTypes),
     [T, always(null)]])
 
-  getLastEvents = async (name, many) => {
-    const url = `https://api.github.com/users/${name}/events`
-
-    return reduceWhile(
+  const updateLastEvents = async () => {
+    events = reduceWhile(
       complement(propEq('length', many)),
-      (events, rawEvent) => {
+      (eventsAcc, rawEvent) => {
         const event = getEventInfo(rawEvent)
-        const lastEvent = last(events) || {}
+        const lastEvent = last(eventsAcc) || {}
         return event && event.message !== lastEvent.message
-          ? [...events, event]
-          : events
+          ? [...eventsAcc, event]
+          : eventsAcc
       },
       [],
       (await axios.get(url)).data)
   }
 
-  cache = promisifyAll(new NodeCache())
+  setInterval(updateLastEvents, interval * 1000)
+  updateLastEvents()
 }
 
 export default async context => {
   if (process.server) {
-    let events = await cache.getAsync('events')
-
-    if (!events) {
-      console.log('Fetching events...')
-      events = await getLastEvents('cuchi', 5)
-      console.log('Caching...')
-      await cache.setAsync('events', events, 600)
-    }
-
     context.events = events
   }
 }
