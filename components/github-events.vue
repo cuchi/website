@@ -12,7 +12,6 @@
         {{ event.message }}
       </div>
     </div>
-    <a target="_blank" href="https://github.com/cuchi">Follow me :)</a>
   </div>
 </template>
 

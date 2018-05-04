@@ -1,14 +1,8 @@
 
 const user = process.env.WAKATIME_USER || 'Cuchi'
-const interval = Number(process.env.WAKATIME_INTERVAL || 600)
+const interval = Number(process.env.WAKATIME_INTERVAL || 7200)
 
-const placeHolderChartData = {
-  datasets: [{
-    label: 'Languages (%)',
-    data: [],
-    backgroundColor: []
-  }],
-  labels: [] }
+const placeHolderChartData = { datasets: [{ data: [] }], labels: [] }
 let activity = placeHolderChartData
 
 if (process.server) {
@@ -17,23 +11,26 @@ if (process.server) {
   const blankSlate = { data: { data: { languages: [] } } }
   const url = `https://wakatime.com/api/v1/users/@${user}/stats/last_7_days`
 
-  const updateActivity = async username => {
+  const updateActivity = async () => {
     const toChartData = pipe(
       pathOr([], ['data', 'data', 'languages']),
       reduce(
-        (chartData, { name, percent }) => {
-          const c = ((100 - percent) * 2.5).toFixed(0)
-          return evolve({
-            datasets: adjust(evolve({
-              data: append(percent),
-              backgroundColor: append(`rgba(${c}, ${c}, ${c}, 1)`) }), 0),
-            labels: append(name) }, chartData)
-        },
+        (chartData, { name, percent }) =>
+          evolve({
+            datasets: adjust(evolve({ data: append(percent) }), 0),
+            labels: append(name) }, chartData),
         placeHolderChartData))
 
-    const response = await axios.get(url).catch(() => blankSlate)
+    try {
+      const response = await axios.get(url)
+      if (response.status !== 200) {
+        throw new Error(response.data.message)
+      }
 
-    activity = toChartData(response)
+      activity = toChartData(response)
+    } catch (err) {
+      console.log(`Error retrieving WakaTime data: ${err.message}`)
+    }
   }
 
   setInterval(updateActivity, interval * 1000)

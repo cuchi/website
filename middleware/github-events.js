@@ -1,7 +1,7 @@
 
 const user = process.env.GITHUB_USER || 'cuchi'
 const many = Number(process.env.GITHUB_MANY_EVENTS || 5)
-const interval = Number(process.env.GITHUB_INTERVAL || 600)
+const interval = Number(process.env.GITHUB_INTERVAL || 1800)
 
 let events = []
 
@@ -39,17 +39,21 @@ if (process.server) {
     [T, always(null)]])
 
   const updateLastEvents = async () => {
-    events = reduceWhile(
-      complement(propEq('length', many)),
-      (eventsAcc, rawEvent) => {
-        const event = getEventInfo(rawEvent)
-        const lastEvent = last(eventsAcc) || {}
-        return event && event.message !== lastEvent.message
-          ? [...eventsAcc, event]
-          : eventsAcc
-      },
-      [],
-      (await axios.get(url)).data)
+    try {
+      events = reduceWhile(
+        complement(propEq('length', many)),
+        (eventsAcc, rawEvent) => {
+          const event = getEventInfo(rawEvent)
+          const lastEvent = last(eventsAcc) || {}
+          return event && event.message !== lastEvent.message
+            ? [...eventsAcc, event]
+            : eventsAcc
+        },
+        [],
+        (await axios.get(url)).data)
+    } catch (err) {
+      console.log(`Error retrieving GitHub data: ${err.message}`)
+    }
   }
 
   setInterval(updateLastEvents, interval * 1000)
