@@ -1,5 +1,7 @@
 FROM node:9-alpine
 
+RUN apk add --update python make
+
 COPY package.json yarn.lock ./
 
 RUN yarn
