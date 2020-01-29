@@ -10,7 +10,7 @@
     "start": "HOST=0.0.0.0 nuxt start"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "chart.js": "^2.7.2",
     "date-fns": "^1.29.0",
     "material-icons": "^0.2.2",
