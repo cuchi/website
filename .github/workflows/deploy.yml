@@ -1,0 +1,41 @@
+name: Deploy
+on: 
+  push:
+    branches:
+      - master
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.sha }}
+      REPO_PATH: ${{ github.repository }}
+      IMAGE_NAME: website
+      DOCKER_USERNAME: ${{ github.actor }}
+      DOCKER_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Checkout VCS
+        uses: actions/checkout@v1
+
+      - name: Build & push the Docker image
+        run: |
+          docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN docker.pkg.github.com
+          docker build . -t docker.pkg.github.com/$REPO_PATH/$IMAGE_NAME:$TAG
+          docker push docker.pkg.github.com/$REPO_PATH/$IMAGE_NAME:$TAG
+
+      - name: Pull the Docker image & update the service
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOYMENT_HOST }}
+          username: ${{ secrets.DEPLOYMENT_USER }}
+          key: ${{ secrets.DEPLOYMENT_PRIVATE_KEY }}
+          envs: REPO_PATH,IMAGE_NAME,TAG,DOCKER_USERNAME,DOCKER_TOKEN
+          script: |
+            docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN docker.pkg.github.com
+            docker pull docker.pkg.github.com/$REPO_PATH/$IMAGE_NAME:$TAG
+            docker service update \
+              --image docker.pkg.github.com/$REPO_PATH/$IMAGE_NAME:$TAG \
+              $IMAGE_NAME

@@ -1,15 +1,12 @@
-FROM node:9-alpine
+FROM node:12-alpine
 
 RUN apk add --update python make
 
-COPY package.json yarn.lock ./
-
-RUN yarn
-
-COPY . ./
-
 ENV NODE_ENV production
 
-RUN yarn build
+COPY package.json yarn.lock ./
+RUN yarn
+COPY . ./
 
+RUN yarn build
 CMD yarn start
