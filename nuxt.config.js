@@ -1,5 +1,5 @@
 
-module.exports = {
+export default {
   head: {
     titleTemplate: '%s - cuchi.me',
     meta: [
@@ -10,5 +10,9 @@ module.exports = {
   },
   css: [
     '@/assets/css/spectre-custom.scss'
+  ],
+  serverMiddleware: [
+    { path: '/api/github-events', handler: '~/api/github-events.js' },
+    { path: '/api/wakatime-activity', handler: '~/api/wakatime-activity.js' }
   ]
 }

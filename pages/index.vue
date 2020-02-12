@@ -56,18 +56,23 @@
 </template>
 
 <script>
+  import axios from 'axios'
   import GithubEvents from '~/components/github-events'
   import WakatimeActivity from '~/components/wakatime-activity'
 
   export default {
-    middleware: ['github-events', 'wakatime-activity'],
-
     head: {
       title: 'Home'
     },
 
     components: { GithubEvents, WakatimeActivity },
-    asyncData: ({ events, activity }) => ({ events, activity })
+    asyncData: async () => {
+      console.dir(process.env)
+      return {
+        events: (await axios.get('http://localhost:3000/api/github-events')).data, 
+        activity: (await axios.get('http://localhost:3000/api/wakatime-activity')).data
+      }
+    }
   }
 </script>
 
