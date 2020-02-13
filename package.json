@@ -10,16 +10,16 @@
     "start": "HOST=0.0.0.0 nuxt start"
   },
   "dependencies": {
-    "axios": "0.18.1",
+    "axios": "0.19.2",
     "chart.js": "2.9.3",
-    "date-fns": "1.30.1",
-    "material-icons": "0.2.3",
-    "node-cache": "4.2.1",
+    "date-fns": "2.9.0",
+    "material-icons": "0.3.1",
+    "node-cache": "5.1.0",
     "node-sass": "4.13.1",
-    "nuxt": "1.4.5",
+    "nuxt": "2.11.0",
     "patternomaly": "1.3.2",
-    "ramda": "0.25.0",
-    "sass-loader": "7.3.1",
+    "ramda": "0.27.0",
+    "sass-loader": "8.0.2",
     "spectre.css": "0.5.8",
     "vue-chartjs": "3.5.0"
   }
