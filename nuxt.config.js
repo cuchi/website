@@ -14,5 +14,10 @@ export default {
   serverMiddleware: [
     { path: '/api/github-events', handler: '~/api/github-events.js' },
     { path: '/api/wakatime-activity', handler: '~/api/wakatime-activity.js' }
-  ]
+  ],
+  env: {
+    baseUrl: process.env.NODE_ENV === 'production'
+      ? 'https://cuchi.me'
+      : 'http://localhost:3000'
+  }
 }

@@ -67,10 +67,10 @@
 
     components: { GithubEvents, WakatimeActivity },
     asyncData: async () => {
-      console.dir(process.env)
+      const baseUrl = process.env.baseUrl
       return {
-        events: (await axios.get('http://localhost:3000/api/github-events')).data, 
-        activity: (await axios.get('http://localhost:3000/api/wakatime-activity')).data
+        events: (await axios.get(`${baseUrl}/api/github-events`)).data, 
+        activity: (await axios.get(`${baseUrl}/api/wakatime-activity`)).data
       }
     }
   }
