@@ -13,6 +13,7 @@
     "@nuxtjs/markdownit": "^1.2.9",
     "axios": "0.19.2",
     "chart.js": "2.9.3",
+    "cheerio": "^1.0.0-rc.3",
     "date-fns": "2.9.0",
     "highlight.js": "^10.1.1",
     "material-icons": "0.3.1",

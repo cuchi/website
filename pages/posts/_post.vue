@@ -3,21 +3,28 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
+import cheerio from "cheerio";
 
-const notFoundError = { statusCode: 404, message: 'Post not found' }
+const notFoundError = { statusCode: 404, message: "Post not found" };
 
 export default {
   asyncData: async ({ params, error }) => {
-    if (params.post.includes('/')) {
-      return error(notFoundError)
+    if (params.post.includes("/")) {
+      return error(notFoundError);
     }
 
     try {
-      return { post: require(`~/assets/posts/${params.post}.md`).default }
+      return {
+        post: require(`~/assets/posts/${params.post}.md`).default
+      };
     } catch {
-      return error(notFoundError)
+      return error(notFoundError);
     }
+  },
+
+  head() {
+    return { title: cheerio("h1", this.post).text() || "Post" };
   }
 };
 </script>
@@ -33,6 +40,7 @@ a {
 
 hr {
   margin-bottom: 3em;
+  opacity: 20%;
 }
 
 blockquote {
@@ -61,6 +69,8 @@ pre {
   margin-top: 1em;
   margin-bottom: 1.5em;
   border-radius: 1em;
+  overflow: auto;
+  overflow-y: overlay;
 }
 
 img {
@@ -70,9 +80,17 @@ img {
   margin-top: 1em;
   margin-bottom: 1.5em;
   border-radius: 0.5em;
+  max-width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
 }
 
 table {
-  margin-bottom: 2em;
+  margin-bottom: 1.5em;
 }
 </style>
