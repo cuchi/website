@@ -31,10 +31,10 @@
         </ul>
       </section>
 
-      <section class="col-12">
+      <!-- <section class="col-12">
         <h3>My career</h3>
         A beautiful interactive timeline would appear here.
-      </section>
+      </section> -->
 
       <section class="col-6 col-sm-12">
         <h3>My latest activity on GitHub</h3>
