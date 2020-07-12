@@ -1,5 +1,16 @@
 <template>
-  <main class="container col-6 col-lg-8 col-md-10 col-sm-11 pad-top" v-html="post"></main>
+  <main class="container col-6 col-lg-8 col-md-10 col-sm-11">
+    <a href="/">Home</a> &gt;
+    <a href="/posts">Posts</a>
+    <article v-html="post" />
+    <hr />
+    <footer>
+      Paulo Henrique Cuchi
+      <a alt="CC-BY" target="_blank" href="https://creativecommons.org/licenses/by/3.0/">
+        <img src="~assets/images/cc-by.png" />
+      </a>
+    </footer>
+  </main>
 </template>
 
 <script>
@@ -10,7 +21,7 @@ const notFoundError = { statusCode: 404, message: "Post not found" };
 
 export default {
   asyncData: async ({ params, error }) => {
-    if (params.post.includes("/")) {
+    if (!params.post || params.post.includes("/")) {
       return error(notFoundError);
     }
 
@@ -92,5 +103,23 @@ th {
 
 table {
   margin-bottom: 1.5em;
+}
+
+main {
+  padding-top: 2em;
+}
+
+article {
+  margin-top: 2em;
+}
+
+footer {
+  text-align: center;
+
+  img {
+    margin-top: 0.5em;
+    border-radius: unset;
+    width: 10%;
+  }
 }
 </style>
