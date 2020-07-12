@@ -1,5 +1,9 @@
+import hljs from 'highlight.js'
 
 export default {
+  modules: [
+    '@nuxtjs/markdownit'
+  ],
   head: {
     titleTemplate: '%s - cuchi.me',
     meta: [
@@ -9,7 +13,8 @@ export default {
     ]
   },
   css: [
-    '@/assets/css/spectre-custom.scss'
+    '@/assets/css/spectre-custom.scss',
+    'highlight.js/styles/github.css'
   ],
   serverMiddleware: [
     { path: '/api/github-events', handler: '~/api/github-events.js' },
@@ -19,5 +24,17 @@ export default {
     baseUrl: process.env.NODE_ENV === 'production'
       ? 'https://cuchi.me'
       : 'http://localhost:3000'
-  }
+  },
+
+  markdownit: {
+    injected: true,
+    highlight: function(str, lang) {
+      if (lang && hljs.getLanguage(lang)) {
+        try {
+          return hljs.highlight(lang, str).value
+        } catch {}                                                                                        
+        return ''
+      }
+    }
+  },
 }

@@ -36,6 +36,6 @@ jobs:
           script: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN docker.pkg.github.com
             docker pull docker.pkg.github.com/$REPO_PATH/$IMAGE_NAME:$TAG
-            docker service update \
-              --image docker.pkg.github.com/$REPO_PATH/$IMAGE_NAME:$TAG \
-              $IMAGE_NAME
+            docker container ls --format '{{.ID}}' | xargs docker container stop
+            docker run -d -p 3000:3000 --name website-$TAG \
+              docker.pkg.github.com/$REPO_PATH/$IMAGE_NAME:$TAG

@@ -1,7 +1,64 @@
 
+@font-face {
+    font-family: "Iosevka Sparkle";
+    src: url("/fonts/iosevka-sparkle-regular.woff") format("woff");
+}
+
+@font-face {
+    font-family: "Iosevka SS03";
+    src: url("/fonts/iosevka-ss03-regular.woff") format("woff");
+}
 
 // Core colors
 $primary-color: #616161;
+$base-font-family: "Iosevka Sparkle";
+$mono-font-family: "Iosevka SS03";
 
-// Import full Spectre source code
-@import "~spectre.css/src/spectre";
+// Variables and mixins
+@import "~spectre.css/src/variables";
+@import "~spectre.css/src/mixins";
+
+/*! Spectre.css v#{$version} | MIT License | github.com/picturepan2/spectre */
+// Reset and dependencies
+@import "~spectre.css/src/normalize";
+@import "~spectre.css/src/base";
+
+// Elements
+@import "~spectre.css/src/typography";
+@import "~spectre.css/src/asian";
+@import "~spectre.css/src/tables";
+@import "~spectre.css/src/buttons";
+@import "~spectre.css/src/forms";
+@import "~spectre.css/src/labels";
+@import "~spectre.css/src/media";
+
+// Layout
+@import "~spectre.css/src/layout";
+@import "~spectre.css/src/hero";
+@import "~spectre.css/src/navbar";
+
+// Components
+@import "~spectre.css/src/accordions";
+@import "~spectre.css/src/avatars";
+@import "~spectre.css/src/badges";
+@import "~spectre.css/src/breadcrumbs";
+@import "~spectre.css/src/bars";
+@import "~spectre.css/src/cards";
+@import "~spectre.css/src/chips";
+@import "~spectre.css/src/dropdowns";
+@import "~spectre.css/src/empty";
+@import "~spectre.css/src/menus";
+@import "~spectre.css/src/modals";
+@import "~spectre.css/src/navs";
+@import "~spectre.css/src/pagination";
+@import "~spectre.css/src/panels";
+@import "~spectre.css/src/popovers";
+@import "~spectre.css/src/steps";
+@import "~spectre.css/src/tabs";
+@import "~spectre.css/src/tiles";
+@import "~spectre.css/src/toasts";
+@import "~spectre.css/src/tooltips";
+
+// Utility classes
+@import "~spectre.css/src/animations";
+@import "~spectre.css/src/utilities";
