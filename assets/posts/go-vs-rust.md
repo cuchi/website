@@ -1,3 +1,6 @@
+
+_**Jul 14, 2020**_
+
 # Go vs Rust: Writing a CLI tool
 
 ![Go vs. Rust](https://gist.githubusercontent.com/cuchi/59255d61717e2d469263eb86cf083067/raw/6ef1a42f335022adf481fb84cabc32ac47f18679/go-vs-rust.png)
@@ -432,4 +435,4 @@ From a personal perspective, both were very fun to learn, and are a great
 addition in a world of C and C++. In fact, they provide a broader range of
 applications, like web services and even
 [front-end web frameworks](https://github.com/yewstack/yew), thanks to 
-WebAssembly :).
+WebAssembly :)
