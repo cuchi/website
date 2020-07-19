@@ -1,14 +1,12 @@
+import { T, always, both, complement, cond, last, map, propEq, reduceWhile } from 'ramda'
+import axios from 'axios'
+import { format } from 'date-fns'
 
 const user = process.env.GITHUB_USER || 'cuchi'
-const many = Number(process.env.GITHUB_MANY_EVENTS || 5)
+const many = Number(process.env.GITHUB_MANY_EVENTS || 7)
 const interval = Number(process.env.GITHUB_INTERVAL || 1800)
 
 let events = []
-
-const { T, always, both, complement, cond, last, map, propEq, reduceWhile } 
-    = require('ramda')
-const axios = require('axios')
-const { format } = require('date-fns')
 
 const url = `https://api.github.com/users/${user}/events`
 const typeEq = propEq('type')
@@ -51,7 +49,7 @@ async function updateLastEvents() {
             [],
             (await axios.get(url)).data)
     } catch (err) {
-        console.log(`Error retrieving GitHub data: ${err.message}`)
+        console.error(`Error retrieving GitHub data: ${err.message}`)
     }
 }
 

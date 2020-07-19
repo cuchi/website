@@ -1,5 +1,10 @@
+{
+    "title": "Go vs Rust: Writing a CLI tool",
+    "createdAt": "2020-07-14",
+    "updatedAt": "2020-07-17"
+}
 
-_**Jul 14, 2020**_
+---META---
 
 # Go vs Rust: Writing a CLI tool
 
@@ -9,8 +14,8 @@ This text is about my adventure writing a small CLI application (twice) using
 two languages a had little experience with.
 
 If you are eager to jump right into the code and compare yourself, check it out 
-the [Go source](https://github.com/cuchi/hashtrack/tree/master/cli-go) and
-[the Rust source](https://github.com/cuchi/hashtrack/tree/master/cli-rust).
+the [Go source](https://github.com/cuchi/hashtrack/tree/master/cli-go) and the
+[Rust source](https://github.com/cuchi/hashtrack/tree/master/cli-rust).
 
 ---
 ## About the Project
@@ -32,7 +37,8 @@ set of features under my project's API.
 
 ## The features
 
-- `hashtrack login` - Creates a session token and store it in the local filesystem in a config file.
+- `hashtrack login` - Creates a session token and store it in the local
+  filesystem in a config file.
 - `hashtrack logout` - Remove the locally stored session token.
 - `hashtrack track <hashtag> [...]` - Tracks one or more hashtags.
 - `hashtrack untrack <hashtag> [...]` - Untracks one or more previously tracked
@@ -51,7 +57,7 @@ WebSockets.
 - The CLI should use the filesystem to store a config file.
 - The CLI should parse positional arguments and flags.
 
-## How did I ended up using Go and Rust?
+## How did I end up using Go and Rust?
 
 There is a large set of languages you can use to write CLI tools.
 
@@ -70,14 +76,11 @@ of each one from my point of view.
 I'm looking forward to learning about them in another pet project.
 
 ## Local environment
-The first thing I look when using a new toolset, is that if it has an easy way
-to make it available it for my user, without using the distribution package
-manager to install it system-wide.
-
-We are talking about version managers, they make our life easier by installing
-the tools in a user-wide manner instead of system-wide. 
-[NVM](https://github.com/nvm-sh/nvm) for Node.js does it very well.
-
+The first thing I look when using a new toolset is whether it has an easy way to
+make it available for my user, without using the distribution package manager to
+install it system-wide. We are talking about version managers, they make our
+life easier by installing the tools in a user-wide manner instead of
+system-wide. [NVM](https://github.com/nvm-sh/nvm) for Node.js does it very well.
 
 When using Go, there is the [GVM](https://github.com/moovweb/gvm) project which
 handles the local install & version management, and it is easy to setup:
@@ -87,13 +90,13 @@ gvm install go1.14 -B
 gvm use go1.14
 ```
 
-There is also two environment variables we need to know, they are `GOROOT` and
+There are also two environment variables we need to know, they are `GOROOT` and
 `GOPATH` -- You can read more about them 
 [here](https://www.jetbrains.com/help/go/configuring-goroot-and-gopath.html).
 
 The first _problem_ I found using Go, was when I was figuring out how the module
 resolution worked along with the `GOPATH`, it became quite frustrating to
-setup a project structure with a functional local development environment.
+set up a project structure with a functional local development environment.
 
 In the end, I just used `GOPATH=$(pwd)` in my project's directory, the main perk
 was to have a per-project dependency setup, like a `node_modules`. It worked
@@ -104,11 +107,11 @@ well.
 with `GOPATH`.
 
 Rust has an official project called [rustup](https://rustup.rs/), which manages
-the Rust intallation, also known as _toolchain_. It can be easily set up with a
+the Rust installation, also known as _toolchain_. It can be easily set up with a
 one-liner. Also, there is a set of optional components using `rustup`,
 such as the [rls](https://github.com/rust-lang/rls) and 
 [rustfmt](https://github.com/rust-lang/rustfmt).
-Many projects requires a _nightly_ version of the Rust toolchain, with `rustup`
+Many projects require a _nightly_ version of the Rust toolchain, with `rustup`
 there was no problem switching between the versions.
 
 ### Editor Support
@@ -138,11 +141,11 @@ For the Go language, I found some libraries, like
 [shurcooL/graphql](https://github.com/shurcooL/graphql), the second one uses
 structs for (un) marshaling the data, that is what made me stick to it.
 
-> I actually used a fork of shurcooL/graphql, because I needed to set the
+> I used a fork of shurcooL/graphql, because I needed to set the
 > `Authorization` header in the client, the changes are in
 [this pull request](https://github.com/shurcooL/graphql/pull/48).
 
-This is the Go example of an GraphQL mutation call:
+This is the Go example of an raphQL mutation call:
 ```go
 type creationMutation struct {
     CreateSession struct {
@@ -168,8 +171,8 @@ func Create(client *graphql.Client, payload CreationPayload) (string, error) {
 
 ```
 
-In Rust, I had to use two libraries to make GraphQL calls, that is because
-`graphql_client` is protocol agnostic, it only focus on code generation for
+In Rust, I had to use two libraries to make GraphQL calls. That is because
+`graphql_client` is protocol agnostic, it only focuses on code generation for
 serializing and deserializing data. So I needed a second library (`reqwest`) to
 take care of the HTTP requests.
 
@@ -204,22 +207,22 @@ pub async fn create(context: &Context, creation: Creation) -> Result<Session, ap
 ```
 
 Neither of the libraries for Go and Rust had any implementation for GraphQL via
-websocket protocol.
+WebSocket protocol.
 
 In fact, `graphql_client` for Rust supports _Subscriptions_, but since it is
 protocol agnostic, I had to implement the whole GraphQL WebSocket communication
 on my own, 
 [check it out](https://github.com/cuchi/hashtrack/blob/b5a75f4368837cd51c621b6560a03e1835ec4e5b/cli-rust/src/tweet.rs#L90).
 
-In order to use WebSockets in the Go version, the library should be modified to
-support the protocol, since I was already using a fork of the library, I didn't
-feel like doing it. Instead, I used a _poor man's_ way "watching", which was to
+To use WebSockets in the Go version, the library should be modified to support
+the protocol. Since I was already using a fork of the library, I didn't feel
+like doing it. Instead, I used a _poor man's_ way "watching", which was to
 request the API every 5 seconds to retrieve new tweets,
 [I'm not proud of it](https://github.com/cuchi/hashtrack/blob/b5a75f4368837cd51c621b6560a03e1835ec4e5b/cli-go/src/hashtrack/tweets/tweets.go#L65).
 
 Using Go, there is the `go` keyword to spawn a lightweight thread, also called
 _goroutine_. In contrast, Rust uses operating system threads by calling a
-`Thread::spawn`. Besides that, both implementations uses channels to transfer
+`Thread::spawn`. Besides that, both implementations use channels to transfer
 objects between their threads.
 
 ## Error handling
@@ -247,7 +250,7 @@ or an `Err(E)` for errors. It also has the `Option<T>` enum, with `Some(T)` or
 `None`, If you are familiar with Haskell, you may recognize
 those as the `Either` and the `Maybe` monads.
 
-There is also a syntatic sugar for error propagation (`?`) that resolves the
+There is also a syntactic sugar for error propagation (`?`) that resolves the
 value from the `Result` or `Option` structure, automatically returning
 `Err(...)` or `None` when something goes bad.
 
@@ -273,13 +276,14 @@ pub fn save(&mut self) -> io::Result<()> {
     file.write_all(json.as_bytes())
 }
 ```
-The combination of
+Rust has:
 - monadic constructs (`Option` & `Result`)
 - the error propagation operator
 - the `From` trait, to automatically convert errors on propagation
 
-makes up the best error handling solution a saw in a language, being simple,
-sound and maintenable at the same time.
+The combination of the three features above makes up the best error handling
+solution a saw in a language, being simple, sound, and maintainable at the same
+time.
 
 ## Compilation time
 Go is build with fast compilation time as a critical requirement, let's see:
@@ -311,7 +315,7 @@ That's impressive, let's see how Rust does this:
     Finished dev [unoptimized + debuginfo] target(s) in 1m 44s
 cargo build  363,80s user 17,05s system 365% cpu 1:44,09 total
 ```
-It compiled all the dependencies, which is 214 modules in total. When we run it
+It compiled all the dependencies, which are 214 modules in total. When we run it
 again, everything is already compiled, so it runs instantly:
 ```bash
 > time cargo build # Second time
@@ -323,9 +327,9 @@ cargo build  0,07s user 0,03s system 104% cpu 0,094 total
     Finished dev [unoptimized + debuginfo] target(s) in 3.15s
 cargo build  3,01s user 0,52s system 111% cpu 3,162 total
 ```
-As you can see, Rust uses an incremental compilation model, which recompiles
-the module dependency tree in a partial way, starting from changed modules until
-it propagates into its dependents.
+As you can see, Rust uses an incremental compilation model, which partially
+recompiles the module dependency tree, starting from changed modules until it
+propagates into its dependents.
 
 If you are doing a release build, it takes longer, which is expected because of
 the optimization tasks the compiler do internally:
@@ -384,18 +388,18 @@ This memory usage accounts for the task of:
 - parsing a JSON response
 - writing the formatted data to `stdout`
 
-Both languages has different ways to manage memory and allocations. 
+Both languages have different ways to manage memory and allocations. 
 
 Go has a garbage collector, which is a common way to track down unused heap
 memory and reclaim it instead of doing this manually. Since garbage collectors
-are a composition of heuristics, there is always tradeoffs, generally between
+are a composition of heuristics, there are always tradeoffs, generally between
 performance and memory usage.
 
-Rust memory model has concepts like _onwership_, _borrowing_ and _lifetimes_,
+Rust memory model has concepts like _ownership_, _borrowing_, and _lifetimes_,
 which not only helps with memory safety, but also guarantee total control of
 the program heap memory without manual management or a garbage collector.
 
-For comparison, let's take some other executables which does a rather _similar_
+For comparison, let's take some other executables which do a rather _similar_
 task:
 | Command                               | Maximum resident set size (kbytes) |
 |---------------------------------------|------------------------------------|
@@ -407,8 +411,8 @@ task:
 
 ## Conclusion
 They were both very great tools for the job. But of course, they have different
-priorities, on one side, we have an option which tries to keep software
-development simple, maintainable and accessible. On the other hand, we have a
+priorities. On one side, we have an option which tries to keep software
+development simple, maintainable, and accessible. On the other hand, we have a
 language focused on soundness, safety, and performance.
 
 ### Reasons I would use Go
@@ -426,13 +430,13 @@ language focused on soundness, safety, and performance.
 multiplatform codebase
 
 There are some details from both of the languages that still triggers me.
-- Go focus **so much** in being simple that it has the opposite effect sometimes
+- Go focus **so much** on being simple that it has the opposite effect sometimes
 (like `GOROOT` and `GOPATH`, for example).
 - I still don't understand very well how lifetimes work in Rust, and it can get
   quite frustrating if you ever try to deal with it.
 
 From a personal perspective, both were very fun to learn, and are a great
-addition in a world of C and C++. In fact, they provide a broader range of
+addition in a world of C and C++. They provide a broader range of
 applications, like web services and even
 [front-end web frameworks](https://github.com/yewstack/yew), thanks to 
 WebAssembly :)
