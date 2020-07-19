@@ -1,13 +1,12 @@
+import axios from 'axios'
+import { adjust, append, evolve, pathOr, pipe, reduce } from 'ramda'
 
 const user = process.env.WAKATIME_USER || 'Cuchi'
 const interval = Number(process.env.WAKATIME_INTERVAL || 7200)
+const url = `https://wakatime.com/api/v1/users/@${user}/stats/last_7_days`
 
 const placeHolderChartData = { datasets: [{ data: [] }], labels: [] }
 let activity = placeHolderChartData
-
-const axios = require('axios')
-const { adjust, append, evolve, pathOr, pipe, reduce } = require('ramda')
-const url = `https://wakatime.com/api/v1/users/@${user}/stats/last_7_days`
 
 async function updateActivity() {
     const toChartData = pipe(

@@ -1,12 +1,11 @@
-
 @font-face {
-    font-family: "Iosevka Sparkle";
-    src: url("/fonts/iosevka-sparkle-regular.woff") format("woff");
+  font-family: "Iosevka Sparkle";
+  src: url("/fonts/iosevka-sparkle-regular.woff") format("woff");
 }
 
 @font-face {
-    font-family: "Iosevka SS03";
-    src: url("/fonts/iosevka-ss03-regular.woff") format("woff");
+  font-family: "Iosevka SS03";
+  src: url("/fonts/iosevka-ss03-regular.woff") format("woff");
 }
 
 // Core colors
@@ -62,3 +61,9 @@ $mono-font-family: "Iosevka SS03";
 // Utility classes
 @import "~spectre.css/src/animations";
 @import "~spectre.css/src/utilities";
+
+// Custom global CSS
+
+a {
+  text-decoration: underline;
+}

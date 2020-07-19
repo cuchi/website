@@ -1,5 +1,3 @@
-import hljs from 'highlight.js'
-
 export default {
   modules: [
     '@nuxtjs/markdownit'
@@ -18,7 +16,8 @@ export default {
   ],
   serverMiddleware: [
     { path: '/api/github-events', handler: '~/api/github-events.js' },
-    { path: '/api/wakatime-activity', handler: '~/api/wakatime-activity.js' }
+    { path: '/api/wakatime-activity', handler: '~/api/wakatime-activity.js' },
+    { path: '/api/posts', handler: '~/api/posts.js' }
   ],
   env: {
     baseUrl: process.env.NODE_ENV === 'production'
@@ -29,6 +28,7 @@ export default {
   markdownit: {
     injected: true,
     highlight: function(str, lang) {
+      const hljs = require('highlight.js')
       if (lang && hljs.getLanguage(lang)) {
         try {
           return hljs.highlight(lang, str).value

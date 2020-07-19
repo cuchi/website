@@ -24,17 +24,12 @@
         </ul>
       </section>
 
-      <section class="col-12">
-        <h3>My posts</h3>
-        <ul>
-          <li><a href="./posts/go-vs-rust">Go vs Rust: Writing a CLI tool</a></li>
-        </ul>
-      </section>
+      <PostsSection v-bind:posts="posts" />
 
       <!-- <section class="col-12">
         <h3>My career</h3>
         A beautiful interactive timeline would appear here.
-      </section> -->
+      </section>-->
 
       <section class="col-6 col-sm-12">
         <h3>My latest activity on GitHub</h3>
@@ -46,7 +41,7 @@
         <WakatimeActivity v-bind:activity="activity" />
       </section>
 
-      <section class="col-12">
+      <section class="col-12 social-buttons">
         <a target="_blank" href="https://github.com/cuchi">
           <img class="social-button" src="~assets/images/github.png" />
         </a>
@@ -70,38 +65,41 @@
 import axios from "axios";
 import GithubEvents from "~/components/github-events";
 import WakatimeActivity from "~/components/wakatime-activity";
+import PostsSection from "~/components/posts-section";
 
 export default {
   head: {
     title: "Home"
   },
 
-  components: { GithubEvents, WakatimeActivity },
+  components: { GithubEvents, WakatimeActivity, PostsSection },
   asyncData: async () => {
     const baseUrl = process.env.baseUrl;
-    const [events, activities] = await Promise.all([
+    const [events, activities, posts] = await Promise.all([
       axios.get(`${baseUrl}/api/github-events`),
-      axios.get(`${baseUrl}/api/wakatime-activity`)
-    ])
+      axios.get(`${baseUrl}/api/wakatime-activity`),
+      axios.get(`${baseUrl}/api/posts`)
+    ]);
     return {
       events: events.data,
-      activity: activities.data
+      activity: activities.data,
+      posts: posts.data
     };
   }
 };
 </script>
 
 <style lang="scss">
-a {
-  text-decoration: underline;
-}
-
 section {
   padding: 1em 1em 1em 0;
 }
 
 .pad-top {
   padding-top: 3em;
+}
+
+.social-buttons {
+  text-align: center;
 }
 
 .social-button {
