@@ -1,6 +1,7 @@
 import coreFs from 'fs'
 import path from 'path'
 import { sortBy, prop } from 'ramda'
+import { format } from 'date-fns'
 
 const fs = coreFs.promises
 
@@ -29,8 +30,27 @@ class PostLoader {
     async getPost(fileName) {
         const post = await fs.readFile(`assets/posts/${fileName}`)
         const [meta, contents] = post.toString().split(`${metaSeparator}\n`)
-        return { meta: JSON.parse(meta), contents: contents.trim() }
+        const parsedMeta = JSON.parse(meta)
+        return { 
+            meta: { 
+                ...parsedMeta, 
+                formatted: formatDates(parsedMeta)
+            }, 
+            contents: contents.trim()
+        }
     }
+}
+
+function formatDates(meta) {
+    const formatDate = date => format(new Date(date), 'MMM do, yyyy')
+    const formatted = {
+        createdAt: formatDate(meta.createdAt)
+    }
+    if (meta.updatedAt) {
+        formatted.updatedAt = formatDate(meta.updatedAt)
+    }
+
+    return formatted
 }
 
 const postLoader = new PostLoader()

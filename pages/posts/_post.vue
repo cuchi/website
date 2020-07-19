@@ -3,6 +3,13 @@
     <a href="/">Home</a> &gt;
     <a href="/posts">Posts</a> &gt;
     <b>{{ meta.title }}</b>
+
+    <p class="article-status">
+      Published at {{ meta.formatted.createdAt }}
+      <br />
+      <template v-if="meta.updatedAt">Last updated at {{ meta.formatted.updatedAt }}</template>
+    </p>
+
     <article v-html="$md.render(contents)" />
     <hr />
     <footer>
@@ -40,6 +47,12 @@ export default {
 </script>
 
 <style lang="scss">
+.article-status {
+  margin-top: 1em;
+  font-size: 80%;
+  opacity: 60%;
+}
+
 article {
   margin-top: 2em;
 
