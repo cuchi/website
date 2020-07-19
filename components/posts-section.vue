@@ -1,6 +1,6 @@
 <template>
   <section class="pt-2">
-    <h2 class="pt-2">Posts</h2>
+    <h3 class="pt-2">Posts</h3>
     <ul>
       <li v-for="post in posts" v-bind:key="post.name">
         <a :href="`/posts/${post.name}`">{{ post.title }}</a>
