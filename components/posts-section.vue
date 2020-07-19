@@ -18,6 +18,6 @@ export default { props: ["posts"] };
 <style lang="scss" scoped>
 .date-detail {
   text-decoration: none;
-  opacity: 50%;
+  opacity: 0.5;
 }
 </style>

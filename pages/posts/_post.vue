@@ -50,7 +50,7 @@ export default {
 .article-status {
   margin-top: 1em;
   font-size: 80%;
-  opacity: 60%;
+  opacity: 0.6;
 }
 
 article {
@@ -62,7 +62,7 @@ article {
 
   hr {
     margin-bottom: 3em;
-    opacity: 20%;
+    opacity: 0.2;
   }
 
   blockquote {
