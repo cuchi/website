@@ -1,7 +1,7 @@
 {
     "title": "Go vs Rust: Writing a CLI tool",
     "createdAt": "2020-07-14",
-    "updatedAt": "2020-07-17"
+    "updatedAt": "2020-07-24"
 }
 
 ---META---
@@ -13,9 +13,9 @@
 This text is about my adventure writing a small CLI application (twice) using 
 two languages a had little experience with.
 
-If you are eager to jump right into the code and compare yourself, check it out 
-the [Go source](https://github.com/cuchi/hashtrack/tree/master/cli-go) and the
-[Rust source](https://github.com/cuchi/hashtrack/tree/master/cli-rust).
+If you are eager to jump right into the code and compare it yourself, check it
+out the [Go source](https://github.com/cuchi/hashtrack/tree/master/cli-go) and
+the [Rust source](https://github.com/cuchi/hashtrack/tree/master/cli-rust).
 
 ---
 ## About the Project
@@ -65,15 +65,16 @@ In this case, I wanted a language I had little or no prior experience with, I
 also wanted one that could easily compile to a native executable, which is a 
 nice perk to have on a CLI tool.
 
-My first obvious choice was Go, for some reason. But I also had a little 
+My first obvious choice was Go, for some reason. But I also had little 
 experience with Rust, and I saw it could also be a good fit for this project.
 
 So... why not both? Since my main objective here is to learn, could be a great
-opportunity to implement this project twice and find what are the _pro and cons_
-of each one from my point of view.
+opportunity to implement this project twice and find what are the _pros and
+cons_ of each one from my point of view.
 
->Honorable mentions to Crystal and Nim, those were very promising options too.
-I'm looking forward to learning about them in another pet project.
+>Honorable mentions to [Crystal](https://crystal-lang.org/) and
+[Nim](https://nim-lang.org/), those were very promising options too. I'm looking
+forward to learn about them in another pet project.
 
 ## Local environment
 The first thing I look when using a new toolset is whether it has an easy way to
@@ -172,7 +173,7 @@ func Create(client *graphql.Client, payload CreationPayload) (string, error) {
 ```
 
 In Rust, I had to use two libraries to make GraphQL calls. That is because
-`graphql_client` is protocol agnostic, it only focuses on code generation for
+`graphql_client` is protocol-agnostic, it only focuses on code generation for
 serializing and deserializing data. So I needed a second library (`reqwest`) to
 take care of the HTTP requests.
 
@@ -210,14 +211,14 @@ Neither of the libraries for Go and Rust had any implementation for GraphQL via
 WebSocket protocol.
 
 In fact, `graphql_client` for Rust supports _Subscriptions_, but since it is
-protocol agnostic, I had to implement the whole GraphQL WebSocket communication
+protocol-agnostic, I had to implement the whole GraphQL WebSocket communication
 on my own, 
 [check it out](https://github.com/cuchi/hashtrack/blob/b5a75f4368837cd51c621b6560a03e1835ec4e5b/cli-rust/src/tweet.rs#L90).
 
 To use WebSockets in the Go version, the library should be modified to support
 the protocol. Since I was already using a fork of the library, I didn't feel
-like doing it. Instead, I used a _poor man's_ way "watching", which was to
-request the API every 5 seconds to retrieve new tweets,
+like doing it. Instead, I used a poor man's way of "watching" the new tweets,
+which was to request the API every 5 seconds to retrieve them,
 [I'm not proud of it](https://github.com/cuchi/hashtrack/blob/b5a75f4368837cd51c621b6560a03e1835ec4e5b/cli-go/src/hashtrack/tweets/tweets.go#L65).
 
 Using Go, there is the `go` keyword to spawn a lightweight thread, also called
@@ -228,7 +229,7 @@ objects between their threads.
 ## Error handling
 
 In Go, errors are treated just like any other value. The common way to handle
-errors in Go, is just to check if it is present.
+errors in Go is to just check if they are present.
 ```go
 func (config *Config) Save() error {
 	contents, err := json.MarshalIndent(config, "", "    ")
@@ -247,12 +248,12 @@ func (config *Config) Save() error {
 
 Rust has the `Result<T, E>` enum, which can encapsulate an `Ok(T)` for success,
 or an `Err(E)` for errors. It also has the `Option<T>` enum, with `Some(T)` or
-`None`, If you are familiar with Haskell, you may recognize
+`None`. If you are familiar with Haskell, you may recognize
 those as the `Either` and the `Maybe` monads.
 
-There is also a syntactic sugar for error propagation (`?`) that resolves the
-value from the `Result` or `Option` structure, automatically returning
-`Err(...)` or `None` when something goes bad.
+There is also a syntactic sugar for error propagation (the `?` operator) that
+resolves the value from the `Result` or `Option` structure, automatically
+returning `Err(...)` or `None` when something goes bad.
 
 
 ```rust
@@ -286,7 +287,7 @@ solution a saw in a language, being simple, sound, and maintainable at the same
 time.
 
 ## Compilation time
-Go is build with fast compilation time as a critical requirement, let's see:
+Go is built with fast compilation time as a critical requirement, let's see:
 ```bash
 > time go get hashtrack # Install dependencies
 go get hashtrack  1,39s user 0,41s system 43% cpu 4,122 total
@@ -420,6 +421,7 @@ language focused on soundness, safety, and performance.
 - I want little flexibility, to write plain and simple code
 - If I build exceptionally/mostly for Linux
 - If compilation time is an issue
+- I want mature asynchronous semantics
 
 ### Reasons I would use Rust
 - I want state-of-the-art error handling for my code
@@ -440,3 +442,8 @@ addition in a world of C and C++. They provide a broader range of
 applications, like web services and even
 [front-end web frameworks](https://github.com/yewstack/yew), thanks to 
 WebAssembly :)
+
+If you want another comparison between the two languages that is far in-depth
+than this one, check out
+[this article](https://fasterthanli.me/articles/i-want-off-mr-golangs-wild-ride)
+from [fasterthanlime](https://twitter.com/fasterthanlime).
