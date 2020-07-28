@@ -2,12 +2,12 @@
   <main class="container col-6 col-lg-8 col-md-10 col-sm-11 pt-2">
     <a href="/">Home</a> &gt;
     <a href="/posts">Posts</a> &gt;
-    <b>{{ meta.title }}</b>
+    <b>{{ title }}</b>
 
     <p class="article-status">
-      Published at {{ meta.formatted.createdAt }}
+      Published at {{ createdAtPretty }}
       <br />
-      <template v-if="meta.updatedAt">Last updated at {{ meta.formatted.updatedAt }}</template>
+      <template v-if="updatedAt">Last updated at {{ updatedAtPretty }}</template>
     </p>
 
     <article v-html="$md.render(contents)" />
@@ -32,7 +32,7 @@ export default {
   asyncData: async ({ params, error }) => {
     try {
       const response = await axios.get(
-        `${process.env.baseUrl}/api/posts/${params.post}`
+        `${process.env.BASE_URL}/api/posts/${params.post}`
       );
       return response.data;
     } catch (err) {
@@ -41,7 +41,7 @@ export default {
   },
 
   head() {
-    return { title: this.meta.title || "Post" };
+    return { title: this.title || "Post" };
   }
 };
 </script>

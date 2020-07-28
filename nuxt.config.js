@@ -17,14 +17,15 @@ export default {
   serverMiddleware: [
     { path: '/api/github-events', handler: '~/api/github-events.js' },
     { path: '/api/wakatime-activity', handler: '~/api/wakatime-activity.js' },
-    { path: '/api/posts', handler: '~/api/posts.js' }
+    { path: '/api/posts', handler: '~/api/posts.js' },
+    { path: '/rss.xml', handler: '~/api/rss.js' },
   ],
   env: {
-    baseUrl: process.env.NODE_ENV === 'production'
+    BASE_URL: process.env.NODE_ENV === 'production'
       ? 'https://cuchi.me'
-      : 'http://localhost:3000'
+      : 'http://localhost:3000',
+    SITE_NAME: 'Paulo Henrique Cuchi',
   },
-
   markdownit: {
     injected: true,
     highlight: function(str, lang) {

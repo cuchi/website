@@ -5,7 +5,7 @@
       <li v-for="post in posts" v-bind:key="post.name">
         <a :href="`/posts/${post.name}`">{{ post.title }}</a>
         -
-        <span class="date-detail">{{ post.formatted.createdAt }}</span>
+        <span class="date-detail">{{ post.createdAtPretty }}</span>
       </li>
     </ul>
   </section>

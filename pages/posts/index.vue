@@ -14,7 +14,7 @@ export default {
   components: { PostsSection },
 
   asyncData: async () => {
-    const baseUrl = process.env.baseUrl;
+    const baseUrl = process.env.BASE_URL;
     const posts = await axios.get(`${baseUrl}/api/posts`);
     return { posts: posts.data };
   },

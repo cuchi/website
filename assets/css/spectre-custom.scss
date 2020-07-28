@@ -8,10 +8,12 @@
   src: url("/fonts/iosevka-ss03-regular.woff") format("woff");
 }
 
-// Core colors
-$primary-color: #616161;
+// Fonts
 $base-font-family: "Iosevka Sparkle";
 $mono-font-family: "Iosevka SS03";
+
+// Core colors
+$primary-color: #616161;
 
 // Variables and mixins
 @import "~spectre.css/src/variables";

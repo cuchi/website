@@ -74,7 +74,7 @@ export default {
 
   components: { GithubEvents, WakatimeActivity, PostsSection },
   asyncData: async () => {
-    const baseUrl = process.env.baseUrl;
+    const baseUrl = process.env.BASE_URL;
     const [events, activities, posts] = await Promise.all([
       axios.get(`${baseUrl}/api/github-events`),
       axios.get(`${baseUrl}/api/wakatime-activity`),

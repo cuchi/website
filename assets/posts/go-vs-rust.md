@@ -35,7 +35,7 @@ that it could be a perfect place to test my skills by implementing a CLI tool. I
 already had the server, so I just needed to pick a language to implement a small
 set of features under my project's API.
 
-## The features
+## Features
 
 - `hashtrack login` - Creates a session token and store it in the local
   filesystem in a config file.
