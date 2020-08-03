@@ -11,7 +11,7 @@
 ![Go vs. Rust](https://gist.githubusercontent.com/cuchi/59255d61717e2d469263eb86cf083067/raw/6ef1a42f335022adf481fb84cabc32ac47f18679/go-vs-rust.png)
 
 This text is about my adventure writing a small CLI application (twice) using 
-two languages a had little experience with.
+two languages I had little experience with.
 
 If you are eager to jump right into the code and compare it yourself, check it
 out the [Go source](https://github.com/cuchi/hashtrack/tree/master/cli-go) and
@@ -283,7 +283,7 @@ Rust has:
 - the `From` trait, to automatically convert errors on propagation
 
 The combination of the three features above makes up the best error handling
-solution a saw in a language, being simple, sound, and maintainable at the same
+solution I saw in a language, being simple, sound, and maintainable at the same
 time.
 
 ## Compilation time
