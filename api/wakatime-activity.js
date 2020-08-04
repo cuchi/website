@@ -28,7 +28,7 @@ async function updateActivity() {
 
         activity = toChartData(response)
     } catch (err) {
-        console.log(`Error retrieving WakaTime data: ${err.message}`)
+        console.error(`Error retrieving WakaTime data: ${err.message}`)
     }
 }
 

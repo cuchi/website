@@ -6,7 +6,6 @@ export default async function (req, res) {
     const postName = req.url.replace('/', '')
     if (!postName) {
         const allPosts = []
-        console.log(posts)
         for (const post of Object.values(posts)) {
             allPosts.push(post)
         }

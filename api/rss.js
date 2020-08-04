@@ -42,7 +42,6 @@ function RssBuilder() {
     let builtRss
     return function build(posts) {
         if (!builtRss) {
-            console.log('foo')
             for (const post of posts) {
                 baseRss.rss.channel.item.push(buildItem(post))
             }
