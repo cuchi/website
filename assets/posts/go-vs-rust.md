@@ -1,7 +1,7 @@
 {
     "title": "Go vs Rust: Writing a CLI tool",
     "createdAt": "2020-07-14",
-    "updatedAt": "2020-07-24"
+    "updatedAt": "2020-08-04"
 }
 
 ---META---
@@ -10,7 +10,7 @@
 
 ![Go vs. Rust](https://gist.githubusercontent.com/cuchi/59255d61717e2d469263eb86cf083067/raw/6ef1a42f335022adf481fb84cabc32ac47f18679/go-vs-rust.png)
 
-This text is about my adventure writing a small CLI application (twice) using 
+This text is about my adventure writing a small CLI application (twice) using
 two languages I had little experience with.
 
 If you are eager to jump right into the code and compare it yourself, check it
@@ -20,8 +20,8 @@ the [Rust source](https://github.com/cuchi/hashtrack/tree/master/cli-rust).
 ---
 ## About the Project
 
-I have a _pet project_ called Hashtrack, which is a full-stack web application I 
-wrote for a technical interview. This project is rather small and it is simple 
+I have a _pet project_ called Hashtrack, which is a full-stack web application I
+wrote for a technical interview. This project is rather small and it is simple
 to use:
 
 1. You authenticate - considering you already created your account
@@ -61,12 +61,13 @@ WebSockets.
 
 There is a large set of languages you can use to write CLI tools.
 
-In this case, I wanted a language I had little or no prior experience with, I 
-also wanted one that could easily compile to a native executable, which is a 
+In this case, I wanted a language I had little or no prior experience with, I
+also wanted one that could easily compile to a native executable, which is a
 nice perk to have on a CLI tool.
 
-My first obvious choice was Go, for some reason. But I also had little 
-experience with Rust, and I saw it could also be a good fit for this project.
+My first obvious choice was Go, maybe because a lot of CLI tools I use are
+implemented using it. But I also had little experience with Rust, and I saw it
+could also be a good fit for this project.
 
 So... why not both? Since my main objective here is to learn, could be a great
 opportunity to implement this project twice and find what are the _pros and
@@ -92,7 +93,7 @@ gvm use go1.14
 ```
 
 There are also two environment variables we need to know, they are `GOROOT` and
-`GOPATH` -- You can read more about them 
+`GOPATH` -- You can read more about them
 [here](https://www.jetbrains.com/help/go/configuring-goroot-and-gopath.html).
 
 The first _problem_ I found using Go, was when I was figuring out how the module
@@ -110,7 +111,7 @@ with `GOPATH`.
 Rust has an official project called [rustup](https://rustup.rs/), which manages
 the Rust installation, also known as _toolchain_. It can be easily set up with a
 one-liner. Also, there is a set of optional components using `rustup`,
-such as the [rls](https://github.com/rust-lang/rls) and 
+such as the [rls](https://github.com/rust-lang/rls) and
 [rustfmt](https://github.com/rust-lang/rustfmt).
 Many projects require a _nightly_ version of the Rust toolchain, with `rustup`
 there was no problem switching between the versions.
@@ -121,7 +122,7 @@ find extensions for both Go and Rust in the marketplace.
 
 When debugging with Rust, I had to install the
 [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb)
-extension after following 
+extension after following
 [this tutorial](https://www.forrestthewoods.com/blog/how-to-debug-rust-with-visual-studio-code/).
 
 ## Package management
@@ -137,7 +138,7 @@ their documentation available in [docs.rs](https://docs.rs)
 My first objective was to see how easy could be to implement a simple GraphQL
 query/mutation over HTTP.
 
-For the Go language, I found some libraries, like 
+For the Go language, I found some libraries, like
 [machinebox/graphql](https://github.com/machinebox/graphql) and
 [shurcooL/graphql](https://github.com/shurcooL/graphql), the second one uses
 structs for (un) marshaling the data, that is what made me stick to it.
@@ -146,7 +147,7 @@ structs for (un) marshaling the data, that is what made me stick to it.
 > `Authorization` header in the client, the changes are in
 [this pull request](https://github.com/shurcooL/graphql/pull/48).
 
-This is the Go example of an raphQL mutation call:
+This is the Go example of an GraphQL mutation call:
 ```go
 type creationMutation struct {
     CreateSession struct {
@@ -212,7 +213,7 @@ WebSocket protocol.
 
 In fact, `graphql_client` for Rust supports _Subscriptions_, but since it is
 protocol-agnostic, I had to implement the whole GraphQL WebSocket communication
-on my own, 
+on my own,
 [check it out](https://github.com/cuchi/hashtrack/blob/b5a75f4368837cd51c621b6560a03e1835ec4e5b/cli-rust/src/tweet.rs#L90).
 
 To use WebSockets in the Go version, the library should be modified to support
@@ -268,11 +269,11 @@ The code above is the equivalent of
 pub fn save(&mut self) -> io::Result<()> {
     let json = match serde_json::to_string(&self.contents) {
         Ok(json) => json,
-        Err(e) => return Err(e)
+        Err(e) => return Err(e.into())
     };
     let mut file = match File::create(&self.path) {
         Ok(file) => file,
-        Err(e) => return Err(e)
+        Err(e) => return Err(e.into())
     };
     file.write_all(json.as_bytes())
 }
@@ -358,7 +359,7 @@ the versions. `time -v` displays a lot of interesting info, but here we are
 looking for the **Maximum resident set size** of the process, which is the peak
 amount of allocated physical memory during the execution.
 ```bash
-for n in {1..5}; do 
+for n in {1..5}; do
     /usr/bin/time -v ./hashtrack list > /dev/null 2>> time.log
 done
 grep 'Maximum resident set size' time.log
@@ -389,7 +390,7 @@ This memory usage accounts for the task of:
 - parsing a JSON response
 - writing the formatted data to `stdout`
 
-Both languages have different ways to manage memory and allocations. 
+Both languages have different ways to manage memory and allocations.
 
 Go has a garbage collector, which is a common way to track down unused heap
 memory and reclaim it instead of doing this manually. Since garbage collectors
@@ -404,7 +405,7 @@ For comparison, let's take some other executables which do a rather _similar_
 task:
 | Command                               | Maximum resident set size (kbytes) |
 |---------------------------------------|------------------------------------|
-| `heroku apps`                         | 56436                              | 
+| `heroku apps`                         | 56436                              |
 | `gh pr list`                          | 26456                              |
 | `git ls-remote` (With a SSH remote)   | 6448                               |
 | `git ls-remote` (With a HTTPS remote) | 23488                              |
@@ -415,6 +416,12 @@ They were both very great tools for the job. But of course, they have different
 priorities. On one side, we have an option which tries to keep software
 development simple, maintainable, and accessible. On the other hand, we have a
 language focused on soundness, safety, and performance.
+
+If you want another comparison between the two languages that is far in-depth
+than this one, check out
+[this article](https://fasterthanli.me/articles/i-want-off-mr-golangs-wild-ride)
+from [fasterthanlime](https://twitter.com/fasterthanlime). He also talks about
+some serious issues about multiplatform capabilities.
 
 ### Reasons I would use Go
 - I want a very simple language for my teammates to learn
@@ -428,7 +435,7 @@ language focused on soundness, safety, and performance.
 - I want a multi-paradigm language which lets me write more expressive code
 - If the project has critical requirements about security
 - If the project has critical requirements about performance
-- If the project targets many operating systems and I want a truly 
+- If the project targets many operating systems and I want a truly
 multiplatform codebase
 
 There are some details from both of the languages that still triggers me.
@@ -437,13 +444,12 @@ There are some details from both of the languages that still triggers me.
 - I still don't understand very well how lifetimes work in Rust, and it can get
   quite frustrating if you ever try to deal with it.
 
+>**UPDATE:** `GOPATH` isn't a problem on newer versions of Go, I should check it
+>out and migrate my current Go CLI out of it. This is also a great opportunity
+>for a next post!
+
 From a personal perspective, both were very fun to learn, and are a great
 addition in a world of C and C++. They provide a broader range of
 applications, like web services and even
-[front-end web frameworks](https://github.com/yewstack/yew), thanks to 
+[front-end web frameworks](https://github.com/yewstack/yew), thanks to
 WebAssembly :)
-
-If you want another comparison between the two languages that is far in-depth
-than this one, check out
-[this article](https://fasterthanli.me/articles/i-want-off-mr-golangs-wild-ride)
-from [fasterthanlime](https://twitter.com/fasterthanlime).
