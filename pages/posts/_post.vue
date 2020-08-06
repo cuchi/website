@@ -15,11 +15,11 @@
     <footer>
       Paulo Henrique Cuchi
       <a
-        alt="CC-BY"
-        target="_blank"
         href="https://creativecommons.org/licenses/by/3.0/"
+        target="_blank"
+        rel="noopener noreferrer"
       >
-        <img src="~assets/images/cc-by.png" />
+        <img src="~assets/images/cc-by.png" alt="CC-BY" />
       </a>
     </footer>
   </main>
@@ -42,7 +42,7 @@ export default {
 
   head() {
     return { title: this.title || "Post" };
-  }
+  },
 };
 </script>
 

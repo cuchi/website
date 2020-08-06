@@ -26,11 +26,6 @@
 
       <PostsSection v-bind:posts="posts" />
 
-      <!-- <section class="col-12">
-        <h3>My career</h3>
-        A beautiful interactive timeline would appear here.
-      </section>-->
-
       <section class="col-6 col-sm-12">
         <h3>My latest activity on GitHub</h3>
         <GithubEvents v-bind:events="events" />
@@ -42,11 +37,21 @@
       </section>
 
       <section class="col-12 social-buttons">
-        <a target="_blank" href="https://github.com/cuchi">
-          <img class="social-button" src="~assets/images/github.png" />
+        <a
+          class="social-link"
+          href="https://github.com/cuchi"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img alt="github-link" class="social-button" src="~assets/images/github.png" />
         </a>
-        <a target="_blank" href="https://www.linkedin.com/in/paulo-henrique-cuchi-02684b116/">
-          <img class="social-button" src="~assets/images/linkedin.png" />
+        <a
+          class="social-link"
+          href="https://www.linkedin.com/in/paulo-henrique-cuchi-02684b116/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img alt="linkedin-link" class="social-button" src="~assets/images/linkedin.png" />
         </a>
       </section>
     </main>
@@ -54,8 +59,9 @@
       This website is an open source project under the Apache 2.0
       license. You can find all the source code
       <a
-        target="_blank"
         href="https://github.com/cuchi/website"
+        target="_blank"
+        rel="noopener noreferrer"
       >here</a>.
     </footer>
   </div>
@@ -69,7 +75,7 @@ import PostsSection from "~/components/posts-section";
 
 export default {
   head: {
-    title: "Home"
+    title: "Home",
   },
 
   components: { GithubEvents, WakatimeActivity, PostsSection },
@@ -78,14 +84,14 @@ export default {
     const [events, activities, posts] = await Promise.all([
       axios.get(`${baseUrl}/api/github-events`),
       axios.get(`${baseUrl}/api/wakatime-activity`),
-      axios.get(`${baseUrl}/api/posts`)
+      axios.get(`${baseUrl}/api/posts`),
     ]);
     return {
       events: events.data,
       activity: activities.data,
-      posts: posts.data
+      posts: posts.data,
     };
-  }
+  },
 };
 </script>
 
@@ -100,6 +106,10 @@ section {
 
 .social-buttons {
   text-align: center;
+}
+
+.social-link {
+  display: inline-block;
 }
 
 .social-button {
