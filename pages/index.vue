@@ -8,9 +8,9 @@
         <em>
           I am a self-taught software developer with passion for full-stack web
           development and distributed systems. My goal is to deliver reliable
-          and maintainable applications while working collaboratively with
-          multidisciplinar development teams. <b>I also like to mentor people
-          technically to help them thrive in those same aspects.</b>
+          and maintainable software while working collaboratively with
+          multidisciplinar teams. <b>I also like to mentor people technically to
+          help them thrive in those same aspects.</b>
         </em>
       </blockquote>
     </header>
