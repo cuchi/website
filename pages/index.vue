@@ -6,21 +6,24 @@
 
       <blockquote>
         <em>
-          I am a self-taught software developer with passion for server-side
-          web technologies and distributed systems. My goal is to deliver
-          reliable and maintainable applications with the best technologies in
-          the market.
+          I am a self-taught software developer with passion for full-stack web
+          development and distributed systems. My goal is to deliver reliable
+          and maintainable applications while working collaboratively with
+          multidisciplinar development teams. <b>I also like to mentor people
+          technically to help them thrive in those same aspects.</b>
         </em>
       </blockquote>
     </header>
     <main class="columns">
       <section class="col-6 col-sm-12">
-        <h3>I love working with</h3>
+        <h3>My interests</h3>
         <ul>
-          <li>Backend web development</li>
-          <li>Linux</li>
-          <li>Cloud native technologies</li>
-          <li>Continuous integration &amp; continuous delivery</li>
+          <li>Fullstack web development</li>
+          <li>Technical leadership and mentorship</li>
+          <li>Programming paradigms</li>
+          <li>Distributed systems</li>
+          <li>DevOps culture, processes &amp; tools</li>
+          <li>Tools, productivity and philosophy of Unix-based operating systems</li>
         </ul>
       </section>
 
@@ -47,7 +50,7 @@
         </a>
         <a
           class="social-link"
-          href="https://www.linkedin.com/in/paulo-henrique-cuchi-02684b116/"
+          href="https://www.linkedin.com/in/pcuchi/"
           target="_blank"
           rel="noopener noreferrer"
         >
