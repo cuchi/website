@@ -9,8 +9,11 @@
           I am a self-taught software developer with passion for full-stack web
           development and distributed systems. My goal is to deliver reliable
           and maintainable software while working collaboratively with
-          multidisciplinar teams. <b>I also like to mentor people technically to
-          help them thrive in those same aspects.</b>
+          multidisciplinar teams.
+          <b>
+            I also like to mentor people technically to help them thrive in
+            those same aspects.
+          </b>
         </em>
       </blockquote>
     </header>
@@ -39,6 +42,28 @@
         <WakatimeActivity v-bind:activity="activity" />
       </section>
 
+      <section>
+        <h3>See also</h3>
+        <ul>
+          <li>
+            <a 
+              href="https://fasterthanli.me/"
+              target="_blank"
+              rel="noopener">Amos's blog (fasterthanlime)</a>
+            - Great reference for in-depth topics on Rust and systems
+            programming in general.
+          </li>
+          <li>
+            <a 
+              href="https://lukesmith.xyz/"
+              target="_blank"
+              rel="noopener">Luke Smith</a>
+            - Very good content on free software, internet independence and 
+            tutorials on Linux and your day-to-day shell scripting tools.
+          </li>
+        </ul>
+      </section>
+
       <section class="col-12 social-buttons">
         <a
           class="social-link"
@@ -46,7 +71,11 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img alt="github-link" class="social-button" src="~assets/images/github.png" />
+          <img
+            alt="github-link"
+            class="social-button"
+            src="~assets/images/github.png"
+          />
         </a>
         <a
           class="social-link"
@@ -54,13 +83,29 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img alt="linkedin-link" class="social-button" src="~assets/images/linkedin.png" />
+          <img
+            alt="linkedin-link"
+            class="social-button"
+            src="~assets/images/linkedin.png"
+          />
+        </a>
+        <a
+          class="social-link"
+          href="/rss.xml"
+          target="_blank"
+          rel="nofollow"
+        >
+          <img
+            alt="rss-link"
+            class="social-button"
+            src="~assets/images/rss.png"
+          />
         </a>
       </section>
     </main>
     <footer>
-      This website is an open source project under the Apache 2.0
-      license. You can find all the source code
+      This website is an open source project under the Apache 2.0 license. You
+      can find all the source code
       <a
         href="https://github.com/cuchi/website"
         target="_blank"
