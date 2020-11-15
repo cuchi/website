@@ -26,39 +26,44 @@
           <li>Programming paradigms</li>
           <li>Distributed systems</li>
           <li>DevOps culture, processes &amp; tools</li>
-          <li>Tools, productivity and philosophy of Unix-based operating systems</li>
+          <li>
+            Tools, productivity and philosophy of Unix-based operating systems
+          </li>
         </ul>
       </section>
 
-      <PostsSection v-bind:posts="posts" />
+      <PostsSection :posts="posts" />
 
       <section class="col-6 col-sm-12">
         <h3>My latest activity on GitHub</h3>
-        <GithubEvents v-bind:events="events" />
+        <GithubEvents :events="events" />
       </section>
 
       <section class="col-6 col-sm-12">
         <h3>What I've been using this week</h3>
-        <WakatimeActivity v-bind:activity="activity" />
+        <WakatimeActivity :activity="activity" />
+      </section>
+
+      <section class="col-12">
+        <h3>My career</h3>
+        <Timeline :events="career.events" :current-date="career.currentDate" />
       </section>
 
       <section>
         <h3>See also</h3>
         <ul>
           <li>
-            <a 
-              href="https://fasterthanli.me/"
-              target="_blank"
-              rel="noopener">Amos's blog (fasterthanlime)</a>
+            <a href="https://fasterthanli.me/" target="_blank" rel="noopener"
+              >Amos's blog (fasterthanlime)</a
+            >
             - Great reference for in-depth topics on Rust and systems
             programming in general.
           </li>
           <li>
-            <a 
-              href="https://lukesmith.xyz/"
-              target="_blank"
-              rel="noopener">Luke Smith</a>
-            - Very good content on free software, internet independence and 
+            <a href="https://lukesmith.xyz/" target="_blank" rel="noopener"
+              >Luke Smith</a
+            >
+            - Very good content on free software, internet independence and
             tutorials on Linux and your day-to-day shell scripting tools.
           </li>
         </ul>
@@ -89,12 +94,7 @@
             src="~assets/images/linkedin.png"
           />
         </a>
-        <a
-          class="social-link"
-          href="/rss.xml"
-          target="_blank"
-          rel="nofollow"
-        >
+        <a class="social-link" href="/rss.xml" target="_blank" rel="nofollow">
           <img
             alt="rss-link"
             class="social-button"
@@ -110,7 +110,8 @@
         href="https://github.com/cuchi/website"
         target="_blank"
         rel="noopener noreferrer"
-      >here</a>.
+        >here</a
+      >.
     </footer>
   </div>
 </template>
@@ -120,24 +121,27 @@ import axios from "axios";
 import GithubEvents from "~/components/github-events";
 import WakatimeActivity from "~/components/wakatime-activity";
 import PostsSection from "~/components/posts-section";
+import Timeline from "~/components/timeline";
 
 export default {
   head: {
     title: "Home",
   },
 
-  components: { GithubEvents, WakatimeActivity, PostsSection },
+  components: { GithubEvents, WakatimeActivity, PostsSection, Timeline },
   asyncData: async () => {
     const baseUrl = process.env.BASE_URL;
-    const [events, activities, posts] = await Promise.all([
+    const [events, activities, posts, career] = await Promise.all([
       axios.get(`${baseUrl}/api/github-events`),
       axios.get(`${baseUrl}/api/wakatime-activity`),
       axios.get(`${baseUrl}/api/posts`),
+      axios.get(`${baseUrl}/api/career`),
     ]);
     return {
       events: events.data,
       activity: activities.data,
       posts: posts.data,
+      career: career.data,
     };
   },
 };

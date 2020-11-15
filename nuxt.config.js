@@ -18,6 +18,7 @@ export default {
     { path: '/api/github-events', handler: '~/api/github-events.js' },
     { path: '/api/wakatime-activity', handler: '~/api/wakatime-activity.js' },
     { path: '/api/posts', handler: '~/api/posts.js' },
+    { path: '/api/career', handler: '~/api/career.js' },
     { path: '/rss.xml', handler: '~/api/rss.js' },
   ],
   env: {
