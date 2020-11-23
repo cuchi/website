@@ -118,10 +118,10 @@
 
 <script>
 import axios from "axios";
-import GithubEvents from "~/components/github-events";
-import WakatimeActivity from "~/components/wakatime-activity";
-import PostsSection from "~/components/posts-section";
-import Timeline from "~/components/timeline";
+import GithubEvents from "~/components/GithubEvents";
+import WakatimeActivity from "~/components/WakatimeActivity";
+import PostsSection from "~/components/PostsSection";
+import Timeline from "~/components/Timeline";
 
 export default {
   head: {

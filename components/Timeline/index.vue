@@ -36,7 +36,7 @@
 <script>
 import { differenceInDays, getYear, parseISO } from "date-fns";
 import { range } from "ramda";
-import TimelineTooltip from "./timeline-tooltip";
+import TimelineTooltip from "../TimelineTooltip";
 
 export default {
   props: {

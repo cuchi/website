@@ -8,7 +8,7 @@
 
 <script>
 import axios from 'axios'
-import PostsSection from "~/components/posts-section";
+import PostsSection from "~/components/PostsSection";
 
 export default {
   components: { PostsSection },
