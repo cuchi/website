@@ -1,7 +1,5 @@
 export default {
-  modules: [
-    '@nuxtjs/markdownit'
-  ],
+  modules: [],
   head: {
     titleTemplate: '%s - cuchi.me',
     meta: [
