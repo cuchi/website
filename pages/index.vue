@@ -1,6 +1,6 @@
 
 <template>
-  <div class="container col-6 col-lg-8 col-md-10 col-sm-11 pad-top">
+  <div class="container content pad-top">
     <header>
       <h1>Paulo Henrique Cuchi</h1>
 
@@ -18,7 +18,7 @@
       </blockquote>
     </header>
     <main class="columns">
-      <section class="col-6 col-sm-12">
+      <section class="col-6 col-lg-12">
         <h3>My interests</h3>
         <ul>
           <li>Fullstack web development</li>
@@ -34,12 +34,12 @@
 
       <PostsSection :posts="posts" />
 
-      <section class="col-6 col-sm-12">
+      <section class="col-6 col-lg-12">
         <h3>My latest activity on GitHub</h3>
         <GithubEvents :events="events" />
       </section>
 
-      <section class="col-6 col-sm-12">
+      <section class="col-6 col-lg-12">
         <h3>What I've been using this week</h3>
         <WakatimeActivity :activity="activity" />
       </section>
@@ -150,6 +150,12 @@ export default {
 <style lang="scss">
 section {
   padding: 1em 1em 1em 0;
+}
+
+.content {
+  max-width: 1100px;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .pad-top {

@@ -21,3 +21,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+canvas {
+  max-width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
