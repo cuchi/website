@@ -1,10 +1,16 @@
 <template>
   <div v-if="this.contents" id="tooltip">
-    <div>{{ this.contents.type }}</div>
-    <div>{{ this.contents.where }}</div>
+    <header>
+      <div class="header-description">
+        <div><strong>{{ this.contents.where }}</strong></div>
+        <div>{{ this.contents.title }} - {{ this.contents.type }}</div>
+      </div>
+      <img v-if="this.contents.logoUrl" :src="this.contents.logoUrl" />
+    </header>
     <hr />
-    <div>{{ this.contents.title }}</div>
-    <div><strong>{{ this.contents.where }}</strong></div>
+    <ul v-for="activity in this.contents.activities" :key="activity">
+      <li>{{ activity }}</li>
+    </ul>
   </div>
 </template>
 
@@ -19,6 +25,25 @@ hr {
   border: 1px dashed;
   opacity: 0.5;
   margin-bottom: 1rem;
+}
+
+img {
+  float: right;
+}
+
+header {
+  clear: both;
+  /* height: 100px; */
+}
+
+header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.header-description {
+  float: left;
 }
 
 #tooltip {

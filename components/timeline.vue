@@ -17,7 +17,7 @@
         @mousemove="(event) => showTooltip(event, bar.id)"
       >
         <span>
-          {{ bar.title }}
+          {{ bar.title }} - {{ bar.where }}
         </span>
       </div>
     </div>
@@ -196,6 +196,14 @@ export default {
 </script>
 
 <style scoped>
+
+span {
+  
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #timeline-panel {
   overflow-x: scroll;
   overflow-y: visible;
@@ -233,6 +241,8 @@ export default {
   align-content: center;
   flex-direction: column;
   text-align: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .timeline-bar:hover {
