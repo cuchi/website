@@ -1,6 +1,19 @@
 import coreFs from 'fs'
 import path from 'path'
 import { format } from 'date-fns'
+import markdownIt from 'markdown-it'
+import hljs from 'highlight.js'
+
+const markdown = markdownIt({
+    highlight: function (str, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+            try {
+                return hljs.highlight(lang, str).value
+            } catch { }
+            return ''
+        }
+    }
+})
 
 const fs = coreFs.promises
 
@@ -52,7 +65,7 @@ class PostLoader {
         return {
             ...parsedMeta,
             ...this.prettyDates(parsedMeta),
-            contents: contents.trim()
+            contents: markdown.render(contents.trim())
         }
     }
 

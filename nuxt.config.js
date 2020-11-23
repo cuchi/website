@@ -27,16 +27,4 @@ export default {
       : 'http://localhost:3000'),
     SITE_NAME: 'Paulo Henrique Cuchi',
   },
-  markdownit: {
-    injected: true,
-    highlight: function (str, lang) {
-      const hljs = require('highlight.js')
-      if (lang && hljs.getLanguage(lang)) {
-        try {
-          return hljs.highlight(lang, str).value
-        } catch { }
-        return ''
-      }
-    }
-  },
 }

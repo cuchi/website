@@ -10,7 +10,7 @@
       <template v-if="updatedAt">Last updated at {{ updatedAtPretty }}</template>
     </p>
 
-    <article v-html="$md.render(contents)" />
+    <article v-html="contents" />
     <hr />
     <footer>
       Paulo Henrique Cuchi
