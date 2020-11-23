@@ -5,6 +5,7 @@
   "author": "Paulo Henrique Cuchi <paulo.cuchi@gmail.com>",
   "license": "Apache-2.0",
   "scripts": {
+    "postinstall": "patch-package",
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "HOST=0.0.0.0 nuxt start"
@@ -19,7 +20,9 @@
     "material-icons": "0.3.1",
     "node-sass": "^5.0.0",
     "nuxt": "^2.14.7",
+    "patch-package": "^6.2.2",
     "patternomaly": "1.3.2",
+    "postinstall-postinstall": "^2.1.0",
     "ramda": "0.27.0",
     "sass-loader": "^10.1.0",
     "spectre.css": "0.5.8",
