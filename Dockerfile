@@ -1,6 +1,4 @@
-FROM node:12-alpine
-
-RUN apk add --update python make
+FROM node:14.17.1
 
 ENV NODE_ENV production
 
