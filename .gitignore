@@ -1,2 +1,6 @@
 node_modules
 .nuxt
+
+yarn-error.log
+.nuxt-storybook
+storybook-static

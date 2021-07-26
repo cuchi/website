@@ -1,0 +1,15 @@
+diff --git a/node_modules/chart.js/dist/Chart.js b/node_modules/chart.js/dist/Chart.js
+index 7a1a28d..9eada1c 100755
+--- a/node_modules/chart.js/dist/Chart.js
++++ b/node_modules/chart.js/dist/Chart.js
+@@ -5,8 +5,8 @@
+  * Released under the MIT License
+  */
+ (function (global, factory) {
+-typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(function() { try { return require('moment'); } catch(e) { } }()) :
+-typeof define === 'function' && define.amd ? define(['require'], function(require) { return factory(function() { try { return require('moment'); } catch(e) { } }()); }) :
++typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(function() { }()) :
++typeof define === 'function' && define.amd ? define(['require'], function(require) { return factory(function() { }()); }) :
+ (global = global || self, global.Chart = factory(global.moment));
+ }(this, (function (moment) { 'use strict';
+ 
