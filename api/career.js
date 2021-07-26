@@ -51,7 +51,7 @@ export default async function(req, res) {
       },
       {
         id: "48a2723a-2c67-4794-8503-15de57349f41",
-        title: "R&D Software Developer",
+        title: "Software Developer (R&D)",
         where: "NG Informática",
         type: "Full-time job",
         activities: [
@@ -72,7 +72,19 @@ export default async function(req, res) {
         where: "Magrathea Labs",
         title: "Software Developer",
         type: "Full-time job",
-        activities: [],
+        activities: [
+          `Worked on a data intensive web application that collects and displays
+          reports for animal production corporations. The main technologies used
+          were Python, Django, PostgreSQL, Redis, ElasticSearch and Angular.`,
+          `Worked as a tech lead of a forked subset of the project above. This
+          new project had international stakeholders who shared regular
+          follow-ups with our development team.`,
+          `Provided technical mentorship to employees on the projects we had in
+          common.`,
+          `Worked on a internal project of the company that employees used to
+          make appointments to managed by the HR. The stack of this project was
+          Node.Js, TypeScript, React and PostgreSQL.`
+        ],
         logoUrl: "/career-logos/magrathea.jpeg",
         period: { begin: "2020-03-10" },
       },

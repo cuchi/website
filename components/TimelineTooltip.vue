@@ -2,12 +2,18 @@
   <div v-if="this.contents" id="tooltip">
     <header>
       <div class="header-description">
-        <div><strong>{{ this.contents.where }}</strong></div>
+        <div>
+          <strong>{{ this.contents.where }}</strong>
+        </div>
         <div>{{ this.contents.title }} - {{ this.contents.type }}</div>
+        <div class="time-period">
+          {{ this.getFormattedPeriod() }}
+          <span class="time-duration">({{ this.getDuration() }})</span>
+        </div>
       </div>
       <img v-if="this.contents.logoUrl" :src="this.contents.logoUrl" />
     </header>
-    <hr />
+    <hr v-if="this.hasActivities()" />
     <ul v-for="activity in this.contents.activities" :key="activity">
       <li>{{ activity }}</li>
     </ul>
@@ -15,8 +21,35 @@
 </template>
 
 <script>
+import { intervalToDuration, formatDuration } from "date-fns";
+
 export default {
   props: ["contents"],
+
+  methods: {
+    hasActivities() {
+      return this.contents.activities && this.contents.activities.length;
+    },
+
+    formatDate(dateString) {
+      return dateString.replace(/-/g, "/");
+    },
+
+    getFormattedPeriod() {
+      const { begin, end } = this.contents.period;
+
+      return `${this.formatDate(begin)} - ${this.formatDate(end || "Ongoing")}`;
+    },
+
+    getDuration() {
+      const { begin, end } = this.contents.period;
+      const duration = intervalToDuration({
+        start: new Date(begin),
+        end: end ? new Date(end) : new Date(),
+      });
+      return formatDuration(duration, { format: ['years', 'months'] });
+    },
+  },
 };
 </script>
 
@@ -44,6 +77,14 @@ header:after {
 
 .header-description {
   float: left;
+}
+
+.time-period {
+  font-size: 12px;
+}
+
+.time-duration {
+  opacity: 0.6;
 }
 
 #tooltip {

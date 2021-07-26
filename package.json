@@ -14,7 +14,7 @@
   "dependencies": {
     "axios": "^0.21.0",
     "chart.js": "^2.9.4",
-    "date-fns": "2.9.0",
+    "date-fns": "2.23.0",
     "highlight.js": "^10.1.1",
     "markdown-it": "^12.0.2",
     "material-icons": "0.3.1",
