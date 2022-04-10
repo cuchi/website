@@ -15,7 +15,7 @@ export default async function(req, res) {
         id: "e30c66c1-d594-48fb-a6fa-d9e6219e1b8d",
         level: 1,
         where: "UDESC",
-        title: "Systems Analysis",
+        title: "Systems Analysis and Development",
         type: "Technology Degree",
         logoUrl: "/career-logos/udesc.png",
         period: { begin: "2016-01-10", end: "2018" },
@@ -39,7 +39,7 @@ export default async function(req, res) {
       },
       {
         id: "680a1bd1-19ea-466e-9e69-8499269f9a35",
-        title: "Software Developer",
+        title: "Software Engineer",
         where: "ContaAzul",
         type: "Full-time job",
         activities: [
@@ -51,7 +51,7 @@ export default async function(req, res) {
       },
       {
         id: "48a2723a-2c67-4794-8503-15de57349f41",
-        title: "Software Developer (R&D)",
+        title: "Software Engineer",
         where: "NG Informática",
         type: "Full-time job",
         activities: [
@@ -70,7 +70,7 @@ export default async function(req, res) {
       {
         id: "3b06277a-edf2-4c4a-979d-359480c15f9b",
         where: "Magrathea Labs",
-        title: "Software Developer",
+        title: "Senior Software Engineer",
         type: "Full-time job",
         activities: [
           `Worked on a data intensive web application that collects and displays
@@ -86,7 +86,19 @@ export default async function(req, res) {
           Node.Js, TypeScript, React and PostgreSQL.`
         ],
         logoUrl: "/career-logos/magrathea.jpeg",
-        period: { begin: "2020-03-10" },
+        period: { begin: "2020-03-10", end: "2022-01-31" },
+      },
+      {
+        id: "e5cd5ce6-f506-408a-a15c-ce76d2f4a305",
+        where: "Trusted Health",
+        title: "Staff Software Engineer",
+        type: "Full-time job",
+        activities: [
+          `Worked on the financial team and was responsible for the engineering
+          and understandment of billing and compensation calculation processes.`
+        ],
+        logoUrl: "/career-logos/trusted.jpeg",
+        period: { begin: "2022-02-01" },
       },
       {
         id: "a3d62c73-8fb7-41f2-9fa4-51e481ac2bf5",
