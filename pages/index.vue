@@ -34,16 +34,6 @@
 
       <PostsSection :posts="posts" />
 
-      <section class="col-6 col-lg-12">
-        <h3>My latest activity on GitHub</h3>
-        <GithubEvents :events="events" />
-      </section>
-
-      <section class="col-6 col-lg-12">
-        <h3>What I've been using this week</h3>
-        <WakatimeActivity :activity="activity" />
-      </section>
-
       <section class="col-12">
         <h3>My career</h3>
         <Timeline :events="career.events" :current-date="career.currentDate" />
