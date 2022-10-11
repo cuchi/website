@@ -6,33 +6,30 @@
 
       <blockquote>
         <em>
-          I am a self-taught software developer with passion for full-stack web
-          development and distributed systems. My goal is to deliver reliable
-          and maintainable software while working collaboratively with
-          multidisciplinar teams.
-          <b>
-            I also like to mentor people technically to help them thrive in
-            those same aspects.
-          </b>
+          I'm a software engineer who likes to delete code more than I like to
+          write it.
+
+          This is the place I might share anything I find both interesting and
+          relevant.
+
+          I don't post as much as I would expect.
         </em>
       </blockquote>
     </header>
     <main class="columns">
       <section class="col-6 col-lg-12">
-        <h3>My interests</h3>
+        <h3>Thing I like</h3>
         <ul>
-          <li>Fullstack web development</li>
+          <li>Backend web development</li>
           <li>Technical leadership and mentorship</li>
-          <li>Programming paradigms</li>
-          <li>Distributed systems</li>
           <li>DevOps culture, processes &amp; tools</li>
-          <li>
-            Tools, productivity and philosophy of Unix-based operating systems
-          </li>
+          <li>Unix-based tools and systems, either using or developing them</li>
         </ul>
       </section>
 
       <PostsSection :posts="posts" />
+
+      <!-- GitHub and Wakatime activity would be displayed here -->
 
       <section class="col-12">
         <h3>My career</h3>
