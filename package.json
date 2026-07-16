@@ -1,29 +1,15 @@
 {
-  "name": "website",
-  "version": "1.0.0",
-  "description": "My personal homepage - cuchi.me",
-  "author": "Paulo Henrique Cuchi <paulo.cuchi@gmail.com>",
-  "license": "Apache-2.0",
+  "name": "cuchi.me",
+  "version": "2.0.0",
+  "description": "Paulo Henrique Cuchi - personal website",
+  "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "HOST=0.0.0.0 nuxt start",
-    "storybook": "nuxt storybook"
+    "build": "eleventy",
+    "dev": "eleventy --serve"
   },
-  "dependencies": {
-    "axios": "0.19.2",
-    "chart.js": "2.9.3",
-    "date-fns": "2.23.0",
-    "highlight.js": "^10.1.1",
-    "markdown-it": "^12.0.2",
-    "material-icons": "0.3.1",
-    "node-sass": "4.14.1",
-    "nuxt": "2.13.3",
-    "patternomaly": "1.3.2",
-    "ramda": "0.27.0",
-    "sass-loader": "9.0.2",
-    "spectre.css": "0.5.8",
-    "vue-chartjs": "3.5.0",
-    "xml-js": "^1.6.11"
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-plugin-rss": "^2.0.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0"
   }
 }

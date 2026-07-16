@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hi there! This page is where I share my thoughts and knowledge about software development.">
+  <title>{{ title or "Home" }} - cuchi.me</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="alternate" type="application/rss+xml" title="cuchi.me RSS" href="/rss.xml">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+{{ content | safe }}
+  </div>
+</body>
+</html>

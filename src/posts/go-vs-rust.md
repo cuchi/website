@@ -1,12 +1,10 @@
-{
-    "title": "Go vs Rust: Writing a CLI tool",
-    "createdAt": "2020-07-14",
-    "updatedAt": "2020-08-04"
-}
-
----META---
-
-# Go vs Rust: Writing a CLI tool
+---
+title: "Go vs Rust: Writing a CLI tool"
+date: 2020-07-14
+updated: 2020-08-04
+layout: post
+tags: posts
+---
 
 ![Go vs. Rust](https://gist.githubusercontent.com/cuchi/59255d61717e2d469263eb86cf083067/raw/6ef1a42f335022adf481fb84cabc32ac47f18679/go-vs-rust.png)
 

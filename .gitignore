@@ -1,6 +1,3 @@
-node_modules
-.nuxt
-
-yarn-error.log
-.nuxt-storybook
-storybook-static
+_site/
+node_modules/
+.DS_Store

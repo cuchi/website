@@ -1,0 +1,94 @@
+---
+layout: base
+---
+
+<header>
+  <h1>Paulo Henrique Cuchi</h1>
+
+  <blockquote>
+    <em>
+      I'm a software engineer who likes to delete code more than I like to
+      write it.
+
+      This is the place I might share anything I find both interesting and
+      relevant.
+
+      I don't post as much as I would expect.
+    </em>
+  </blockquote>
+</header>
+
+<main>
+  <section>
+    <h3>Things I like</h3>
+    <ul>
+      <li>Backend web development</li>
+      <li>Technical leadership and mentorship</li>
+      <li>DevOps culture, processes &amp; tools</li>
+      <li>Unix-based tools and systems, either using or developing them</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Posts</h3>
+    <ul>
+    {% for post in collections.posts | reverse %}
+      <li>
+        <a href="{{ post.url }}">{{ post.data.title }}</a>
+        — <span class="date-detail">{{ post.date | readableDate }}</span>
+      </li>
+    {% endfor %}
+    </ul>
+  </section>
+
+  <section>
+    <h3>My career</h3>
+    <div class="career-timeline">
+    {% for event in career %}
+      <div class="career-item"{% if event.isCurrent %} data-current{% endif %}>
+        <div class="career-meta">
+          {{ event.displayBegin }} – {{ event.displayEnd }} · <span class="career-duration">{{ event.duration }}</span>
+        </div>
+        <div class="career-card">
+          <div class="career-header">
+            {% if event.logoUrl %}
+            <img src="{{ event.logoUrl }}" alt="{{ event.where }}" class="career-logo" loading="lazy">
+            {% endif %}
+            <div>
+              <strong>{{ event.where }}</strong>
+              <div>{{ event.title }} · {{ event.type }}</div>
+            </div>
+          </div>
+          {% if event.activities and event.activities.length %}
+          <ul class="career-activities">
+          {% for activity in event.activities %}
+            <li>{{ activity }}</li>
+          {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  </section>
+
+
+</main>
+
+<footer class="site-footer">
+  <div class="social-links">
+    <a href="https://github.com/cuchi" target="_blank" rel="noopener noreferrer" class="social-link">
+      <img alt="GitHub" src="/assets/images/github.png" class="social-icon">
+    </a>
+    <a href="https://www.linkedin.com/in/pcuchi/" target="_blank" rel="noopener noreferrer" class="social-link">
+      <img alt="LinkedIn" src="/assets/images/linkedin.png" class="social-icon">
+    </a>
+    <a href="/rss.xml" class="social-link">
+      <img alt="RSS" src="/assets/images/rss.png" class="social-icon">
+    </a>
+  </div>
+  <p class="footer-text">
+    This website is an open source project under the Apache 2.0 license. You can find all the source code
+    <a href="https://github.com/cuchi/website" target="_blank" rel="noopener noreferrer">here</a>.
+  </p>
+</footer>

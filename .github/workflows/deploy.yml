@@ -1,41 +1,38 @@
-name: Deploy
-on: 
+name: Deploy to GitHub Pages
+
+on:
   push:
-    branches:
-      - master
+    branches: [master]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
-
   build:
-    name: Build
     runs-on: ubuntu-latest
-    env:
-      TAG: ${{ github.sha }}
-      REPO_PATH: ${{ github.repository }}
-      IMAGE_NAME: website
-      DOCKER_USERNAME: ${{ github.actor }}
-      DOCKER_TOKEN: ${{ github.token }}
-
     steps:
-      - name: Checkout VCS
-        uses: actions/checkout@v1
-
-      - name: Build & push the Docker image
-        run: |
-          docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN docker.pkg.github.com
-          docker build . -t docker.pkg.github.com/$REPO_PATH/$IMAGE_NAME:$TAG
-          docker push docker.pkg.github.com/$REPO_PATH/$IMAGE_NAME:$TAG
-
-      - name: Pull the Docker image & update the service
-        uses: appleboy/ssh-action@master
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          host: ${{ secrets.DEPLOYMENT_HOST }}
-          username: ${{ secrets.DEPLOYMENT_USER }}
-          key: ${{ secrets.DEPLOYMENT_PRIVATE_KEY }}
-          envs: REPO_PATH,IMAGE_NAME,TAG,DOCKER_USERNAME,DOCKER_TOKEN
-          script: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN docker.pkg.github.com
-            docker pull docker.pkg.github.com/$REPO_PATH/$IMAGE_NAME:$TAG
-            docker container ls --format '{{.ID}}' | xargs docker container stop
-            docker run -d -p 3000:3000 --name website-$TAG \
-              docker.pkg.github.com/$REPO_PATH/$IMAGE_NAME:$TAG
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
