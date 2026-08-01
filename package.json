@@ -4,12 +4,14 @@
   "description": "Paulo Henrique Cuchi - personal website",
   "private": true,
   "scripts": {
-    "build": "eleventy",
-    "dev": "eleventy --serve"
+    "build": "node scripts/generate-cv.js && eleventy",
+    "dev": "eleventy --serve",
+    "cv": "node scripts/generate-cv.js"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
     "@11ty/eleventy-plugin-rss": "^2.0.0",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0"
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
+    "pdfkit": "^0.19.1"
   }
 }
