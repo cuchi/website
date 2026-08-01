@@ -1,5 +1,6 @@
 ---
 layout: base
+description: "Paulo Henrique Cuchi — software engineer. Thoughts on backend development, Rust, DevOps, and Unix tools."
 ---
 
 <header>
@@ -20,7 +21,7 @@ layout: base
 
 <main>
   <section>
-    <h3>Things I like</h3>
+    <h2>Things I like</h2>
     <ul>
       <li>Backend web development</li>
       <li>Technical leadership and mentorship</li>
@@ -30,7 +31,7 @@ layout: base
   </section>
 
   <section>
-    <h3>Posts</h3>
+    <h2>Posts</h2>
     <ul>
     {% for post in collections.posts | reverse %}
       <li>
@@ -42,7 +43,7 @@ layout: base
   </section>
 
   <section>
-    <h3>My career</h3>
+    <h2>My career</h2>
     <div class="career-timeline">
     {% for event in career %}
       <div class="career-item"{% if event.isCurrent %} data-current{% endif %}>
@@ -72,19 +73,18 @@ layout: base
     </div>
   </section>
 
-
 </main>
 
 <footer class="site-footer">
   <div class="social-links">
     <a href="https://github.com/cuchi" target="_blank" rel="noopener noreferrer" class="social-link">
-      <img alt="GitHub" src="/assets/images/github.png" class="social-icon">
+      <img alt="GitHub" src="/assets/images/github.png" class="social-icon" width="32" height="32">
     </a>
     <a href="https://www.linkedin.com/in/pcuchi/" target="_blank" rel="noopener noreferrer" class="social-link">
-      <img alt="LinkedIn" src="/assets/images/linkedin.png" class="social-icon">
+      <img alt="LinkedIn" src="/assets/images/linkedin.png" class="social-icon" width="32" height="32">
     </a>
     <a href="/rss.xml" class="social-link">
-      <img alt="RSS" src="/assets/images/rss.png" class="social-icon">
+      <img alt="RSS" src="/assets/images/rss.png" class="social-icon" width="32" height="32">
     </a>
   </div>
   <p class="footer-text">
@@ -92,3 +92,18 @@ layout: base
     <a href="https://github.com/cuchi/website" target="_blank" rel="noopener noreferrer">here</a>.
   </p>
 </footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Paulo Henrique Cuchi",
+  "url": "{{ metadata.url }}",
+  "sameAs": [
+    "https://github.com/cuchi",
+    "https://www.linkedin.com/in/pcuchi/"
+  ],
+  "jobTitle": "Software Engineer",
+  "knowsAbout": ["Backend Development", "DevOps", "Rust", "Unix"]
+}
+</script>

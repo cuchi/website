@@ -3,6 +3,7 @@ title: "Using SDL2 bindings in Rust for game development"
 date: 2023-01-30
 layout: post
 tags: posts
+description: "A step-by-step tutorial on building a snake game from scratch using Rust and SDL2 — covering game loops, rendering, input handling, and tick-based state management."
 ---
 
 SDL stands for Simple DirectMedia Layer, which is an open source library that provides APIs for user input, audio, and graphics. It also supports the most popular desktop and mobile operating systems — and even web browsers with WebAssembly — making it easier to write cross-platform code.

@@ -4,6 +4,7 @@ date: 2020-07-14
 updated: 2020-08-04
 layout: post
 tags: posts
+description: "A hands-on comparison of Go and Rust for building CLI tools — covering error handling, compilation time, memory usage, and developer experience."
 ---
 
 ![Go vs. Rust](https://gist.githubusercontent.com/cuchi/59255d61717e2d469263eb86cf083067/raw/6ef1a42f335022adf481fb84cabc32ac47f18679/go-vs-rust.png)

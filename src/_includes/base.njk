@@ -3,11 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Hi there! This page is where I share my thoughts and knowledge about software development.">
-  <title>{{ title or "Home" }} - cuchi.me</title>
+  <meta name="description" content="{{ description or 'Hi there! This page is where I share my thoughts and knowledge about software development.' }}">
+  <title>{{ title or "Paulo Henrique Cuchi" }} — cuchi.me</title>
+  <link rel="canonical" href="{{ metadata.url }}{{ page.url }}">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="alternate" type="application/rss+xml" title="cuchi.me RSS" href="/rss.xml">
   <link rel="stylesheet" href="/assets/css/style.css">
+
+  <meta property="og:title" content="{{ title or 'Paulo Henrique Cuchi' }}">
+  <meta property="og:description" content="{{ description or 'Software engineer who likes to delete code more than write it. Thoughts on backend development, Rust, DevOps, and Unix tools.' }}">
+  <meta property="og:url" content="{{ metadata.url }}{{ page.url }}">
+  <meta property="og:type" content="{% if layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:site_name" content="cuchi.me">
+  {% if date %}<meta property="article:published_time" content="{{ date | dateToRfc3339 }}">{% endif %}
+  {% if updated %}<meta property="article:modified_time" content="{{ updated | dateToRfc3339 }}">{% endif %}
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ title or 'Paulo Henrique Cuchi' }}">
+  <meta name="twitter:description" content="{{ description or 'Software engineer who likes to delete code more than write it.' }}">
 </head>
 <body>
   <div class="container">
