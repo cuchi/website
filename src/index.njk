@@ -7,7 +7,13 @@ description: "Paulo Henrique Cuchi — software engineer. Thoughts on backend de
   <h1>Paulo Henrique Cuchi</h1>
 
   <p class="cv-download">
-    <a href="/Paulo-Henrique-Cuchi.pdf" download>{{ 'downloadCV' | i18n(locale) }}</a>
+    <button class="cv-toggle" onclick="this.parentElement.classList.toggle('open')">
+      {{ 'downloadCV' | i18n(locale) }}
+    </button>
+    <span class="cv-options">
+      <a href="/Paulo-Henrique-Cuchi.pdf" download>EN</a>
+      <a href="/Paulo-Henrique-Cuchi-pt.pdf" download>PT</a>
+    </span>
   </p>
 
   <blockquote>

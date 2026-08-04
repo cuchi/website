@@ -24,6 +24,29 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+
+      - name: Verify English output
+        run: |
+          test -f _site/index.html || { echo "Missing EN homepage"; exit 1; }
+          test -f _site/posts/index.html || { echo "Missing EN posts"; exit 1; }
+          test -f _site/rss.xml || { echo "Missing EN RSS"; exit 1; }
+
+      - name: Verify Portuguese output
+        run: |
+          test -f _site/pt-br/index.html || { echo "Missing PT homepage"; exit 1; }
+          test -f _site/pt-br/posts/index.html || { echo "Missing PT posts"; exit 1; }
+          test -f _site/pt-br/rss.xml || { echo "Missing PT RSS"; exit 1; }
+
+      - name: Verify sitemap
+        run: |
+          count=$(grep -c '<loc>' _site/sitemap.xml)
+          test "$count" -ge 8 || { echo "Sitemap has $count URLs, expected >= 8"; exit 1; }
+
+      - name: Verify CVs
+        run: |
+          test -f _site/Paulo-Henrique-Cuchi.pdf || { echo "Missing EN CV"; exit 1; }
+          test -f _site/Paulo-Henrique-Cuchi-pt.pdf || { echo "Missing PT CV"; exit 1; }
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
