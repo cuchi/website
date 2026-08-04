@@ -165,6 +165,23 @@ Se eu tivesse gastado cinco minutos lendo a página de preços de cada API antes
 
 Neste ponto eu tinha este fluxo de usuário: abrir o app → ver partidas futuras com odds reais → escolher uma partida → escolher um palpite → fazer uma aposta → vê-la na lista compartilhada de apostas.
 
+
+## A backdoor administrativa
+
+Eu precisava de uma forma de sincronizar dados de partidas sem expor isso aos usuários.
+
+> _"Let's expose administrative endpoints inside admin/ which can be only accessed using a super secret token, this is our little backdoor. Add the sync action there."_
+
+O agente:
+- Criou um extrator `AdminAuth` em Rust que verifica um header `X-Admin-Token`
+- Moveu o endpoint de sincronização para `POST /admin/events/sync`
+- Removeu a antiga rota pública de sincronização e o botão do frontend
+- Adicionou `ADMIN_TOKEN` às variáveis de ambiente
+
+Este foi um atalho deliberado. O plano tinha uma fase inteira para workers em background — uma tarefa Tokio que faria auto-sync de eventos e resolveria apostas em loop. Mas o plano gratuito do Render desliga após 15 minutos de inatividade, o que mata qualquer processo de longa duração. Até eu fazer upgrade ou configurar cron jobs, um one-liner `curl` resolve. O endpoint está pronto para ser chamado por qualquer coisa — um cron job, um Render Cron Job, ou só eu acionando manualmente antes da rodada.
+
+![Sincronizando eventos via endpoint admin](/assets/images/vibe-events.jpeg)
+
 ## Polimento que importa
 
 É aqui que o vibe coding realmente brilha. Em vez de passar horas ajustando CSS, eu simplesmente dizia coisas como:
@@ -212,23 +229,6 @@ O agente escreveu comandos ImageMagick para floodfill do fundo para transparente
 ![Fazendo uma aposta com barra de previsão](/assets/images/vibe-bet-desktop.png)
 
 ![Visualização mobile responsiva](/assets/images/vibe-bet-mobile.png)
-
-## A backdoor administrativa
-
-Eu precisava de uma forma de sincronizar dados de partidas sem expor isso aos usuários.
-
-> _"Let's expose administrative endpoints inside admin/ which can be only accessed using a super secret token, this is our little backdoor. Add the sync action there."_
-
-O agente:
-- Criou um extrator `AdminAuth` em Rust que verifica um header `X-Admin-Token`
-- Moveu o endpoint de sincronização para `POST /admin/events/sync`
-- Removeu a antiga rota pública de sincronização e o botão do frontend
-- Adicionou `ADMIN_TOKEN` às variáveis de ambiente
-
-Este foi um atalho deliberado. O plano tinha uma fase inteira para workers em background — uma tarefa Tokio que faria auto-sync de eventos e resolveria apostas em loop. Mas o plano gratuito do Render desliga após 15 minutos de inatividade, o que mata qualquer processo de longa duração. Até eu fazer upgrade ou configurar cron jobs, um one-liner `curl` resolve. O endpoint está pronto para ser chamado por qualquer coisa — um cron job, um Render Cron Job, ou só eu acionando manualmente antes da rodada.
-
-![Sincronizando eventos via endpoint admin](/assets/images/vibe-events.jpeg)
-
 ## Enviando para produção
 
 Então, pulando direto para a última fase do plano:

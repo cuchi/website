@@ -160,6 +160,22 @@ Finally. Real matches. Real odds. The agent had switched APIs four times without
 If I had spent five minutes reading each API's pricing page before diving in, I would've skipped the first three and saved some tokens. But this is the tradeoff with agentic engineering — the iteration speed is so fast that "just try it" is often cheaper than "research it first." Sometimes you burn some cents figuring that out.
 At this point I had this user flow: open the app → see upcoming matches with real odds → pick a match → pick a prediction → place a bet → see it in the shared bet list.
 
+## The admin backdoor
+
+I needed a way to sync match data without exposing it to users.
+
+> _"Let's expose administrative endpoints inside admin/ which can be only accessed using a super secret token, this is our little backdoor. Add the sync action there."_
+
+The agent:
+- Created an `AdminAuth` extractor in Rust that checks an `X-Admin-Token` header
+- Moved the sync endpoint to `POST /admin/events/sync`
+- Removed the old public sync route and the frontend button
+- Added `ADMIN_TOKEN` to the environment variables
+
+This was a deliberate shortcut. The plan had a whole phase for background workers — a Tokio task that would auto-sync events and resolve bets on a loop. But Render's free tier spins down after 15 minutes of inactivity, which kills any long-running process. Until I upgrade or set up cron jobs, a `curl` one-liner does the job. The endpoint is ready to be called by anything — a cron job, a Render Cron Job, or just me hitting it manually before matchday.
+
+![Syncing events via the admin endpoint](/assets/images/vibe-events.jpeg)
+
 ## Polish that matters
 
 This is where vibe coding really shines. Instead of spending hours tweaking CSS, I just said things like:
@@ -204,22 +220,6 @@ The agent wrote ImageMagick commands to floodfill the background to transparent,
 ![Placing a bet with prediction bar](/assets/images/vibe-bet-desktop.png)
 
 ![Mobile responsive view](/assets/images/vibe-bet-mobile.png)
-
-## The admin backdoor
-
-I needed a way to sync match data without exposing it to users.
-
-> _"Let's expose administrative endpoints inside admin/ which can be only accessed using a super secret token, this is our little backdoor. Add the sync action there."_
-
-The agent:
-- Created an `AdminAuth` extractor in Rust that checks an `X-Admin-Token` header
-- Moved the sync endpoint to `POST /admin/events/sync`
-- Removed the old public sync route and the frontend button
-- Added `ADMIN_TOKEN` to the environment variables
-
-This was a deliberate shortcut. The plan had a whole phase for background workers — a Tokio task that would auto-sync events and resolve bets on a loop. But Render's free tier spins down after 15 minutes of inactivity, which kills any long-running process. Until I upgrade or set up cron jobs, a `curl` one-liner does the job. The endpoint is ready to be called by anything — a cron job, a Render Cron Job, or just me hitting it manually before matchday.
-
-![Syncing events via the admin endpoint](/assets/images/vibe-events.jpeg)
 
 ## Shipping to production
 
