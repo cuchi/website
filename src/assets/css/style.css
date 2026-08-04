@@ -345,6 +345,10 @@ section {
   font-size: 0.9em;
 }
 
+.post-title {
+  margin: 0.5em 0 0.3em;
+}
+
 .post-meta {
   font-size: 0.85em;
   opacity: 0.6;

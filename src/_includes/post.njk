@@ -3,9 +3,10 @@ layout: base
 ---
 <nav class="breadcrumb">
   <a href="{% if locale == 'pt' %}/pt-br/{% else %}/{% endif %}">{{ 'home' | i18n(locale) }}</a> &rsaquo;
-  <a href="{% if locale == 'pt' %}/pt-br/posts/{% else %}/posts/{% endif %}">{{ 'posts' | i18n(locale) }}</a> &rsaquo;
-  <strong>{{ title }}</strong>
+  <a href="{% if locale == 'pt' %}/pt-br/posts/{% else %}/posts/{% endif %}">{{ 'posts' | i18n(locale) }}</a>
 </nav>
+
+<h1 class="post-title">{{ title }}</h1>
 
 <p class="post-meta">
   {{ 'published' | i18n(locale) }} {{ date | readableDate(locale) }}
