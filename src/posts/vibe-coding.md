@@ -119,7 +119,6 @@ The agent added `POST /api/dev/login` — creates a random test user, seeds the 
 Once the core was working, the UX polish started:
 
 > _"Two small changes: both Join/Create group actions should be separate buttons, take them out of the dropdown. The dropdown arrow is too far to the right."_
-
 > _"Add a Cancel button to both actions too."_
 
 Later, when the invite feature went live:
@@ -184,7 +183,6 @@ Each request took about 30 seconds. The agent refactored the CSS grid, added `dr
 Some of these were genuinely hard CSS problems. The vertical alignment of "vs" across cards required switching from flexbox to CSS grid with explicit `grid-column` placement. The crest border required `drop-shadow()` calls that follow the PNG's alpha channel. And then there was the yellow button bug:
 
 > _"The .bet-form button has a yellow background, and .team-name which lives inside it, has a white color, it's ugly"_
-
 > _"The yellow is coming from .bet-form button"_
 
 A CSS specificity leak — the bet form's button styles were bleeding into the event cards. The agent added overrides to lock the event cards to their own theme. I wouldn't have caught that specificity bug without scrolling through computed styles for 20 minutes.
@@ -192,7 +190,6 @@ A CSS specificity leak — the bet form's button styles were bleeding into the e
 The crests themselves came from a raw HTML table I pasted:
 
 > _"Download all the crests, it's better to have them locally"_
-
 > _"Here are the actual logos"_
 
 (followed by a massive HTML table with 75 team logos)
@@ -200,7 +197,6 @@ The crests themselves came from a raw HTML table I pasted:
 The agent extracted every `<img>` src, downloaded them, but there was a problem:
 
 > _"Now for the actual crest files, they are all different sizes, formats and some of them are missing the transparent background, how can we solve that? I have imagemagick"_
-
 > _"Most of the crests have white as part of the crest, I just want to remove their background"_
 
 The agent wrote ImageMagick commands to floodfill the background to transparent, normalize every crest to a consistent size, and convert them all to PNG. Seventy-five team logos, batch-processed, with the white parts of the crest preserved.
