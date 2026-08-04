@@ -2,14 +2,14 @@
 layout: base
 ---
 <nav class="breadcrumb">
-  <a href="/">Home</a> &rsaquo;
-  <a href="/posts">Posts</a> &rsaquo;
+  <a href="{% if locale == 'pt' %}/pt-br/{% else %}/{% endif %}">{{ 'home' | i18n(locale) }}</a> &rsaquo;
+  <a href="{% if locale == 'pt' %}/pt-br/posts/{% else %}/posts/{% endif %}">{{ 'posts' | i18n(locale) }}</a> &rsaquo;
   <strong>{{ title }}</strong>
 </nav>
 
 <p class="post-meta">
-  Published {{ date | readableDate }}
-  {% if updated %}<br>Last updated {{ updated | readableDate }}{% endif %}
+  {{ 'published' | i18n(locale) }} {{ date | readableDate(locale) }}
+  {% if updated %}<br>{{ 'lastUpdated' | i18n(locale) }} {{ updated | readableDate(locale) }}{% endif %}
 </p>
 
 <article>

@@ -1,0 +1,61 @@
+module.exports = {
+  en: {
+    posts: "Posts",
+    career: "My career",
+    thingsILike: "Things I like",
+    downloadCV: "Download CV",
+    published: "Published",
+    lastUpdated: "Last updated",
+    home: "Home",
+    viewSource: "View source on GitHub",
+    footer: "This website is an open source project under the Apache 2.0 license.",
+    intro: "I'm a software engineer who likes to delete code more than I like to write it. This is the place I might share anything I find both interesting and relevant. I don't post as much as I would expect.",
+    likes: [
+      "Backend web development",
+      "Technical leadership and mentorship",
+      "DevOps culture, processes & tools",
+      "Unix-based tools and systems, either using or developing them",
+    ],
+    careerTypes: {
+      "Full-time job": "Full-time job",
+      "Scholarship": "Scholarship",
+      "Volunteering": "Volunteering",
+      "Technology Degree": "Technology Degree",
+      "Bachelor's Degree": "Bachelor's Degree",
+      "Technical Degree": "Technical Degree",
+    },
+    months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    ordinal: function(day) {
+      const s = day === 1 || day === 21 || day === 31 ? "st" : day === 2 || day === 22 ? "nd" : day === 3 || day === 23 ? "rd" : "th";
+      return `${day}${s}`;
+    },
+  },
+  pt: {
+    posts: "Posts",
+    career: "Minha carreira",
+    thingsILike: "Coisas que eu gosto",
+    downloadCV: "Baixar CV",
+    published: "Publicado",
+    lastUpdated: "Última atualização",
+    home: "Início",
+    viewSource: "Ver código no GitHub",
+    footer: "Este site é um projeto open source sob a licença Apache 2.0.",
+    intro: "Sou um engenheiro de software que gosta mais de deletar código do que de escrevê-lo. Este é o lugar onde posso compartilhar qualquer coisa que eu ache interessante e relevante. Não posto tanto quanto eu gostaria.",
+    likes: [
+      "Desenvolvimento web backend",
+      "Liderança técnica e mentoria",
+      "Cultura, processos e ferramentas DevOps",
+      "Ferramentas e sistemas Unix, seja usando ou desenvolvendo",
+    ],
+    careerTypes: {
+      "Full-time job": "Tempo integral",
+      "Scholarship": "Bolsista",
+      "Volunteering": "Voluntariado",
+      "Technology Degree": "Tecnólogo",
+      "Bachelor's Degree": "Bacharelado",
+      "Technical Degree": "Curso Técnico",
+    },
+    months: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+    ordinal: function(day) { return day.toString(); },
+  },
+};

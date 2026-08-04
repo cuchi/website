@@ -139,7 +139,7 @@ The agent tried **api-futebol.com.br**. No matches for the free tier.
 
 > _"Change of plans, we're using https://footballdata.io now"_
 
-The agent rewired the sync function. I hit the endpoint. Nothing happened — zero matches, zero odds. The API returned European leagues I'd never heard of.
+The agent rewired the sync function. I hit the endpoint. Nothing happened — zero matches, zero odds. The API returned completely irrelevant European leagues.
 
 > _"You have to filter for country=Brazil"_
 
@@ -232,7 +232,6 @@ The agent:
 - Added `VITE_GOOGLE_CLIENT_ID` as a Docker build arg
 - Created a `.dockerignore`
 - Set up `ENVIRONMENT=production` and `CORS_ALLOWED_ORIGINS`
-- Configured a custom domain (`sobrounadapro.bet`) through Cloudflare
 
 The first deploy failed. I pasted the error:
 
@@ -246,7 +245,7 @@ Then the app exited with no logs — just "Application exited early." I told it:
 
 Turned out the binary was crashing because `libssl3` was missing from the runtime image. The agent added it and the deploy went green.
 
-Within a few iterations, the app was live at [sobrounadapro.bet](https://sobrounadapro.bet).
+Within a few iterations, the app was live at [sobrounadapro.bet](https://sobrounadapro.bet). (I registered the domain myself and pointed it at Render — the agent doesn't have a credit card.)
 
 ![Full app in production](/assets/images/vibe-prod.png)
 
@@ -262,7 +261,7 @@ To put that in perspective: the domain was the most expensive line item. The AI 
 
 ## What vibe coding felt like
 
-The conversation with the agent was continuous. I'd describe a feature, it would read my codebase, make changes across multiple files, and tell me what it did. I'd test it, find an issue, and say "this is broken because X." It would fix it. We went back and forth for about 48 hours total across several sessions.
+The conversation with the agent was continuous. I'd describe a feature, it would read my codebase, make changes across multiple files, and tell me what it did. I'd test it, find an issue, and say "this is broken because X." It would fix it. We went back and forth for about 16 hours total across several sessions in two days.
 
 The hardest parts weren't technical — they were communication problems. Sometimes I described something poorly and the agent implemented the wrong thing. Sometimes it would fix one bug but introduce another. But the iteration speed was so fast that it rarely mattered. I could say "undo that" or "try a different approach" and it would pivot immediately.
 

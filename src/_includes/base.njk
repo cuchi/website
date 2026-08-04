@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ locale }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,21 +10,94 @@
   <link rel="alternate" type="application/rss+xml" title="cuchi.me RSS" href="/rss.xml">
   <link rel="stylesheet" href="/assets/css/style.css">
 
+  {% if locale == "en" %}
+  <link rel="alternate" hreflang="pt-br" href="{{ metadata.url }}/pt-br{{ page.url }}">
+  <link rel="alternate" hreflang="en" href="{{ metadata.url }}{{ page.url }}">
+  {% else %}
+  <link rel="alternate" hreflang="en" href="{{ metadata.url }}{{ page.url | replace('/pt-br/', '/') }}">
+  <link rel="alternate" hreflang="pt-br" href="{{ metadata.url }}{{ page.url }}">
+  {% endif %}
+  <link rel="alternate" hreflang="x-default" href="{{ metadata.url }}{{ page.url | replace('/pt-br/', '/') }}">
+
   <meta property="og:title" content="{{ title or 'Paulo Henrique Cuchi' }}">
   <meta property="og:description" content="{{ description or 'Software engineer who likes to delete code more than write it. Thoughts on backend development, Rust, DevOps, and Unix tools.' }}">
   <meta property="og:url" content="{{ metadata.url }}{{ page.url }}">
   <meta property="og:type" content="{% if layout == 'post' %}article{% else %}website{% endif %}">
   <meta property="og:site_name" content="cuchi.me">
+  <meta property="og:locale" content="{{ locale | replace('pt', 'pt_BR') | replace('en', 'en_US') }}">
   {% if date %}<meta property="article:published_time" content="{{ date | dateToRfc3339 }}">{% endif %}
   {% if updated %}<meta property="article:modified_time" content="{{ updated | dateToRfc3339 }}">{% endif %}
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="{{ title or 'Paulo Henrique Cuchi' }}">
   <meta name="twitter:description" content="{{ description or 'Software engineer who likes to delete code more than write it.' }}">
+
+  <script>
+    (function(){var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.dataset.theme=t})()
+  </script>
 </head>
 <body>
-  <div class="container">
+  <nav class="locale-switcher">
+    {% if locale == "en" %}
+    <span class="locale-active">EN</span>
+    <a href="/pt-br{{ page.url }}" hreflang="pt-br" lang="pt-br" class="locale-link">PT</a>
+    {% else %}
+    <a href="{{ page.url | replace('/pt-br/', '/') }}" hreflang="en" lang="en" class="locale-link">EN</a>
+    <span class="locale-active">PT</span>
+    {% endif %}
+  </nav>
+
+  <div class="container" id="content">
 {{ content | safe }}
   </div>
+
+  <script>
+    function bindLocaleLinks() {
+      document.querySelectorAll('.locale-link').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+          e.preventDefault();
+          var url = this.href;
+          fetch(url).then(function(r) { return r.text() }).then(function(html) {
+            var doc = new DOMParser().parseFromString(html, 'text/html');
+            var content = doc.getElementById('content');
+            if (!content) return;
+            document.getElementById('content').innerHTML = content.innerHTML;
+            document.title = doc.title;
+            document.documentElement.lang = doc.documentElement.lang;
+            history.pushState({}, '', url);
+            var head = document.head;
+            head.querySelectorAll('link[rel="canonical"],link[hreflang]').forEach(function(l) { l.remove() });
+            doc.head.querySelectorAll('link[rel="canonical"],link[hreflang]').forEach(function(l) { head.appendChild(l.cloneNode()) });
+            ['description','og:title','og:description','og:url','og:locale','twitter:title','twitter:description'].forEach(function(n) {
+              var old = head.querySelector('meta[name="'+n+'"],meta[property="'+n+'"]');
+              var neu = doc.head.querySelector('meta[name="'+n+'"],meta[property="'+n+'"]');
+              if (old && neu) old.content = neu.content;
+            });
+            var sw = document.querySelector('.locale-switcher');
+            var newSw = doc.querySelector('.locale-switcher');
+            if (sw && newSw) { sw.innerHTML = newSw.innerHTML; bindLocaleLinks() }
+          })
+        })
+      })
+    }
+    bindLocaleLinks()
+  </script>
+
+  <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode" onclick="var d=document.documentElement;var t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;localStorage.setItem('theme',t)">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
 </body>
 </html>
