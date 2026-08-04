@@ -2,6 +2,7 @@ module.exports = {
   en: {
     posts: "Posts",
     career: "My career",
+    projects: "Projects",
     thingsILike: "Things I like",
     downloadCV: "Download CV",
     published: "Published",
@@ -9,12 +10,14 @@ module.exports = {
     home: "Home",
     viewSource: "View source on GitHub",
     footer: "This website is an open source project under the Apache 2.0 license.",
-    intro: "I'm a software engineer who likes to delete code more than I like to write it. This is the place I might share anything I find both interesting and relevant. I don't post as much as I would expect.",
+    intro: 'Senior Software engineer. Backend, Rust, Ruby, Python, Node, DevOps, infrastructure. Lately experimenting with agentic engineering \u2014 <a href="/posts/vibe-coding/">shipped a full-stack app for $2.96</a>. I tend to believe the best code is the one you do not have to write.',
     likes: [
-      "Backend web development",
+      "Polyglot backend development",
       "Technical leadership and mentorship",
-      "DevOps culture, processes & tools",
-      "Unix-based tools and systems, either using or developing them",
+      "Infrastructure, cloud, and DevOps",
+      "Agentic engineering and vibe coding",
+      "Niche frontend frameworks",
+      "Unix-based tools and systems",
     ],
     careerTypes: {
       "Full-time job": "Full-time job",
@@ -33,6 +36,7 @@ module.exports = {
   pt: {
     posts: "Posts",
     career: "Minha carreira",
+    projects: "Projetos",
     thingsILike: "Coisas que eu gosto",
     downloadCV: "Baixar CV",
     published: "Publicado",
@@ -40,12 +44,14 @@ module.exports = {
     home: "Início",
     viewSource: "Ver código no GitHub",
     footer: "Este site é um projeto open source sob a licença Apache 2.0.",
-    intro: "Sou um engenheiro de software que gosta mais de deletar código do que de escrevê-lo. Este é o lugar onde posso compartilhar qualquer coisa que eu ache interessante e relevante. Não posto tanto quanto eu gostaria.",
+    intro: 'Engenheiro de software sênior. Backend, Rust, Ruby, Python, Node, DevOps, infraestrutura. Ultimamente experimentando Agentic Engineering \u2014 <a href="/pt-br/posts/vibe-coding/">lancei um app full-stack por $2.96</a>. Costumo achar que o melhor código é aquele que você não precisa escrever.',
     likes: [
-      "Desenvolvimento web backend",
+      "Desenvolvimento backend poliglota",
       "Liderança técnica e mentoria",
-      "Cultura, processos e ferramentas DevOps",
-      "Ferramentas e sistemas Unix, seja usando ou desenvolvendo",
+      "Infraestrutura, cloud e DevOps",
+      "Engenharia agentiva e vibe coding",
+      "Frameworks frontend de nicho",
+      "Ferramentas e sistemas Unix",
     ],
     careerTypes: {
       "Full-time job": "Tempo integral",

@@ -489,11 +489,45 @@ article th {
   line-height: 1.4;
 }
 
-.career-activities {
-  margin: 0.6rem 0 0;
-  padding-left: 1.25rem;
-  font-size: 0.9em;
+/* ===== Projects ===== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.75rem;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-card-bg);
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+
+.project-card:hover {
+  border-color: var(--color-primary);
+  opacity: 1;
+}
+
+.project-card strong {
+  color: var(--color-primary);
+  font-size: 0.95em;
+  margin-bottom: 0.3em;
+}
+
+.project-card p {
+  font-size: 0.85em;
   color: var(--color-text-secondary);
+  margin-bottom: 0.5em;
+  flex: 1;
+}
+
+.project-lang {
+  font-size: 0.75em;
+  color: var(--color-muted);
 }
 
 /* ===== Social Links ===== */

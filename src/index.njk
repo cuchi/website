@@ -17,7 +17,7 @@ description: "Paulo Henrique Cuchi — software engineer. Thoughts on backend de
   </p>
 
   <blockquote>
-    <em>{{ 'intro' | i18n(locale) }}</em>
+    <em>{{ 'intro' | i18n(locale) | safe }}</em>
   </blockquote>
 </header>
 
@@ -41,6 +41,19 @@ description: "Paulo Henrique Cuchi — software engineer. Thoughts on backend de
       </li>
     {% endfor %}
     </ul>
+  </section>
+
+  <section>
+    <h2>{{ 'projects' | i18n(locale) }}</h2>
+    <div class="projects-grid">
+      {% for project in projects %}
+      <a href="{{ project.url }}" class="project-card" target="_blank" rel="noopener noreferrer">
+        <strong>{{ project.name }}</strong>
+        <p>{% if locale == 'pt' %}{{ project.descriptionPt or project.description }}{% else %}{{ project.description }}{% endif %}</p>
+        <span class="project-lang">{{ project.lang }}</span>
+      </a>
+      {% endfor %}
+    </div>
   </section>
 
   <section>
