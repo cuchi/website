@@ -175,6 +175,17 @@ article blockquote {
   background: #e0f7fa;
 }
 
+.vibe-note {
+  background: linear-gradient(135deg, #f0e6ff, #e8f0fe);
+  border: 1px solid #c4b5fd;
+  border-left: 4px solid #7c3aed;
+  border-radius: 0 6px 6px 0;
+  padding: 0.75rem 1rem;
+  margin: 1.5em 0;
+  font-size: 0.95em;
+  color: #4c1d95;
+}
+
 article img {
   display: block;
   margin: 1em auto;
