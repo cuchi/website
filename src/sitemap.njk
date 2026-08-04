@@ -3,18 +3,47 @@ permalink: sitemap.xml
 eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="utf-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- English -->
   <url>
     <loc>{{ metadata.url }}/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="{{ metadata.url }}/"/>
+    <xhtml:link rel="alternate" hreflang="pt-br" href="{{ metadata.url }}/pt-br/"/>
   </url>
   <url>
     <loc>{{ metadata.url }}/posts/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="{{ metadata.url }}/posts/"/>
+    <xhtml:link rel="alternate" hreflang="pt-br" href="{{ metadata.url }}/pt-br/posts/"/>
   </url>
 {% for post in collections.posts %}
+  <url>
+    <loc>{{ metadata.url }}{{ post.url }}</loc>
+    <lastmod>{% if post.data.updated %}{{ post.data.updated | dateToRfc3339 }}{% else %}{{ post.date | dateToRfc3339 }}{% endif %}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+{% endfor %}
+  <!-- Portuguese -->
+  <url>
+    <loc>{{ metadata.url }}/pt-br/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="pt-br" href="{{ metadata.url }}/pt-br/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="{{ metadata.url }}/"/>
+  </url>
+  <url>
+    <loc>{{ metadata.url }}/pt-br/posts/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="pt-br" href="{{ metadata.url }}/pt-br/posts/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="{{ metadata.url }}/posts/"/>
+  </url>
+{% for post in collections.postsPt %}
   <url>
     <loc>{{ metadata.url }}{{ post.url }}</loc>
     <lastmod>{% if post.data.updated %}{{ post.data.updated | dateToRfc3339 }}{% else %}{{ post.date | dateToRfc3339 }}{% endif %}</lastmod>
