@@ -580,8 +580,8 @@ article th {
 .cc-by-icon {
   display: block;
   margin: 0.5em auto 1.5em;
-  width: 10%;
-  min-width: 60px;
+  width: 88px;
+  height: auto;
 }
 
 /* ===== Syntax Highlighting (Prism) ===== */
