@@ -1,5 +1,12 @@
 module.exports = [
   {
+    name: "deepsave",
+    description: "Self-hosted finance manager that syncs bank transactions via open banking (Pluggy) and categorizes them with DeepSeek, learning from your corrections. Rust, React and PostgreSQL.",
+    descriptionPt: "Gerenciador financeiro self-hosted que sincroniza transações bancárias via open banking (Pluggy) e as categoriza com o DeepSeek, aprendendo com suas correções. Rust, React e PostgreSQL.",
+    url: "https://github.com/cuchi/deepsave",
+    lang: "Rust",
+  },
+  {
     name: "sobrou-nada-pro-bet",
     description: "Cashless betting app built with Rust, React, and PostgreSQL. Real Brasileirão odds, private groups, and leaderboards.",
     descriptionPt: "App de apostas sem dinheiro real feito com Rust, React e PostgreSQL. Odds reais do Brasileirão, grupos privados e rankings.",
@@ -14,9 +21,9 @@ module.exports = [
     lang: "Python",
   },
   {
-    name: "hashtrack",
-    description: "Twitter hashtag tracking service with GraphQL API, real-time updates, and Svelte frontend.",
-    descriptionPt: "Serviço de monitoramento de hashtags do Twitter com API GraphQL, atualizações em tempo real e frontend Svelte.",
+    name: "hashtrack (archived)",
+    description: "Twitter hashtag tracking service with GraphQL API, real-time updates, and Svelte frontend — archived, 58 stars.",
+    descriptionPt: "Serviço de monitoramento de hashtags do Twitter com API GraphQL, atualizações em tempo real e frontend Svelte — arquivado, 58 estrelas.",
     url: "https://github.com/cuchi/hashtrack",
     lang: "TypeScript",
   },

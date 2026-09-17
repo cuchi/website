@@ -15,7 +15,7 @@ My personal website — built with [Eleventy](https://www.11ty.dev/), zero clien
 ```
 src/
 ├── _includes/        # Base layout, post layout
-├── _data/            # Career timeline data, site metadata
+├── _data/            # Career, open source, CV variants, site metadata
 ├── posts/            # Markdown blog posts
 ├── assets/           # CSS, fonts, images
 ├── index.njk         # Homepage
@@ -34,7 +34,7 @@ npm run dev     # Local server at http://localhost:8080
 npm run build   # Production build to _site/
 ```
 
-The `build` command also regenerates the CV (`public/Paulo-Henrique-Cuchi.pdf`) from the career data in `src/_data/career.js`.
+The `build` command also regenerates every CV (see below) from the data in `src/_data/`.
 
 ## Deployment
 
@@ -42,7 +42,21 @@ Pushes to `master` trigger a GitHub Actions workflow (`.github/workflows/deploy.
 
 ## CV
 
-The download button on the homepage serves a PDF generated at build time from `src/_data/career.js`. Update your career data there and the CV stays in sync automatically. The source script is at `scripts/generate-cv.js`.
+The download button on the homepage serves a PDF generated at build time from the data modules in `src/_data/`. Update the career or open source data and every CV stays in sync automatically.
+
+Resumes come in two variants, defined in `src/_data/cv.js`:
+
+- **`general`** — the default resume, linked from the homepage.
+- **`oss`** — tailored to open-source contributor roles.
+
+`scripts/generate-cv.js` renders each variant once per locale, so `npm run cv` writes four PDFs:
+
+| Variant   | EN                                   | PT                                      |
+| --------- | ------------------------------------ | --------------------------------------- |
+| `general` | `public/Paulo-Henrique-Cuchi.pdf`    | `public/Paulo-Henrique-Cuchi-pt.pdf`    |
+| `oss`     | `public/Paulo-Henrique-Cuchi-oss.pdf` | `public/Paulo-Henrique-Cuchi-oss-pt.pdf` |
+
+A variant controls its own headline, summary, section order, and how much of a section to show. The content itself is shared: `career.js` supplies the experience timeline and `opensource.js` the contributions and owned repositories, so both variants stay in sync.
 
 ## License
 
