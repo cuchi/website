@@ -123,8 +123,8 @@ const raw = [
   },
   {
     where: "UDESC",
-    title: "Computer Science (incomplete)",
-    titlePt: "Ciência da Computação (incompleto)",
+    title: "Computer Science (transferred)",
+    titlePt: "Ciência da Computação (transferido)",
     type: "Bachelor's Degree",
     logoUrl: "/career-logos/udesc.png",
     period: { begin: "2012", end: "2016" },

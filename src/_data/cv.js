@@ -90,8 +90,6 @@ module.exports = {
       en: withoutC(LANGUAGES.en),
       pt: withoutC(LANGUAGES.pt),
     }),
-    // Matched against the untranslated title in src/_data/career.js.
-    excludeEducation: ["Computer Science (incomplete)"],
     // A general reader needs the headline contributions, not the full ledger.
     openSource: { maxContributions: 4 },
     writing: [
